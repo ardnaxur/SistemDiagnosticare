@@ -52,12 +52,12 @@ public class CititorMesaje extends Thread {
         return pis;
     }
     
-    
     //constructor
     public CititorMesaje(ConexiuneProlog _conexiune, ServerSocket _servs) throws IOException{
         servs=_servs;
         conexiune=_conexiune;
     }
+    
     
     @Override
     public void run(){
@@ -70,10 +70,12 @@ public class CititorMesaje extends Thread {
             InputStream is=s_aux.getInputStream();
             
             PipedOutputStream pos=new PipedOutputStream();
-            setPipedInputStream(new PipedInputStream(pos));//leg un pipedInputStream de capatul in care se scrie
+            setPipedInputStream(new PipedInputStream(pos,50000));//leg un pipedInputStream de capatul in care se scrie
             
             int chr;
             String str="";
+            
+            
             while((chr=is.read())!=-1) {//pana nu citeste EOF
                 pos.write(chr);//pun date in Pipe, primite de la Prolog
                 str+=(char)chr;
@@ -84,6 +86,8 @@ public class CititorMesaje extends Thread {
                         public void run(){ 
                             conexiune.getFereastra().getDebugTextArea().append(sirDeScris); 
                             String text=sirDeScris.trim();
+                            
+                            
                             //verific daca e intrebare
                             if(text.length()>2 && text.charAt(0)=='i'&& text.charAt(1)=='(' && text.charAt(text.length()-1)==')')
                             {
@@ -100,6 +104,12 @@ public class CititorMesaje extends Thread {
                             {
                                 String intrebare=text.substring(2, text.length()-1);
                                 conexiune.getFereastra().setSolutie(intrebare);
+                            }
+                            //verific daca e nu este solutie
+                            if(text.length()>2 && text.charAt(0)=='x'&& text.charAt(1)=='(' && text.charAt(text.length()-1)==')')
+                            {
+                                String intrebare = text.substring(2, text.length()-1);
+//                                conexiune.getFereastra().setFaraSolutie(intrebare);
                             }
                         }
 

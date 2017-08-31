@@ -38,7 +38,7 @@ public class ConexiuneProlog {
         InputStream processIs, processStreamErr;
         port=_port;
         fereastra=_fereastra;
-        ServerSocket servs=new ServerSocket(port);
+        ServerSocket servs = new ServerSocket(port);
         //Socket sock_s=servs.accept();
         cititor=new CititorMesaje(this,servs);
         cititor.start();

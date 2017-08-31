@@ -86,19 +86,15 @@ executa([_|_]) :-
 
 scopuri_princ :-
 						scop(Atr),
-						determina(Atr), 
-						setof(sol(Atr,Val,FC),G^fapt(av(Atr,Val),FC,G),L),
+						determina(Atr), setof(sol(Atr,Val,FC),G^fapt(av(Atr,Val),FC,G),L),
 						lista_rev(L,LNou),
 						afiseaza_scop(Atr).
 scopuri_princ:-write('Nu s-au gasit solutii.') .
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 scopuri_princ(Stream) :-
-						scop(Atr),
-						determina(Stream,Atr), 
-						setof(sol(Atr,Val,FC),G^fapt(av(Atr,Val),FC,G),L),
-						lista_rev(L,LNou),
-						afiseaza_scop(Stream,Atr),fail.
+scop(Atr),determina(Stream,Atr), setof(sol(Atr,Val,FC),G^fapt(av(Atr,Val),FC,G),L),
+						lista_rev(L,LNou),afiseaza_scop(Stream,Atr),fail.
 
 scopuri_princ(_).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -290,7 +286,7 @@ interogheaza(Stream,Atr,Mesaj,[da,nu],Istorie) :-
 
 interogheaza(Stream,Atr,Mesaj,Optiuni,Istorie) :-
 	write('\n Intrebareee atr val multiple\n'),
-	write(Stream,i(Mesaj)),nl(Stream),flush_output(Stream),
+	write(Stream,Mesaj),nl(Stream),flush_output(Stream),
 	citeste_opt(Stream,VLista,Optiuni,Istorie),
 	assert_fapt(Atr,VLista).
 
@@ -725,13 +721,7 @@ proceseaza_termen_citit(Stream, X, _):- % cand vrem sa-i spunem "Pa"
 				(X == end_of_file ; X == exit),
 				write(gata),nl,
 				close(Stream).
-
-proceseaza_termen_citit(Stream, comanda(reset),C):-
-				write(Stream,'Resetare\n'),
-                                flush_output(Stream),
-                                executa([reinitiaza]),
-				C1 is C+1, close(Stream),
-				proceseaza_text_primit(Stream,C1).				
+				
 			
 proceseaza_termen_citit(Stream, Altceva,C):- %cand ii trimitem sistemului expert o comanda pe care n-o pricepe
 				write(Stream,'ce vrei, neica, de la mine?! '),write(Stream,Altceva),nl(Stream),

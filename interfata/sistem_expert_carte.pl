@@ -48,7 +48,6 @@ write(H), tab(1),
 scrie_lista(T).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%aici
 scrie_lista(Stream,[]):-nl(Stream),flush_output(Stream).
 
 scrie_lista(Stream,[H|T]) :-
@@ -335,8 +334,6 @@ interogheaza(Stream,Atr,Mesaj,[da,nu],Istorie) :-
 	det_val_fc(X,Val,FC),
 	asserta( fapt(av(Atr,Val),FC,[utiliz]) ).
 */
-
-%aici
 interogheaza(Stream,Atr,Mesaj,Optiuni,Istorie) :-
 	write('\n Intrebare atr val multiple\n'),
 	write(Stream,i(Mesaj)),nl(Stream),flush_output(Stream),
@@ -363,7 +360,7 @@ de_la_utiliz(X,Istorie,Lista_opt) :-
 	proceseaza_raspuns(X,Istorie,Lista_opt).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%aici
+
 de_la_utiliz(Stream,X,Istorie,Lista_opt) :-
 	repeat,write('astept raspuns\n'),citeste_linie(Stream,X),format('Am citit ~p din optiunile ~p\n',[X,Lista_opt]),
 	proceseaza_raspuns(X,Istorie,Lista_opt), write('gata de la utiliz\n').
@@ -387,10 +384,15 @@ asserta( fapt(av(Atr,Val),100,[utiliz])).
 
 
 det_val_fc([nu],da,-100).
+
 det_val_fc([nu,FC],da,NFC) :- NFC is -FC.
+
 det_val_fc([nu,fc,FC],da,NFC) :- NFC is -FC.
+
 det_val_fc([Val,FC],Val,FC).
+
 det_val_fc([Val,fc,FC],Val,FC).
+
 det_val_fc([Val],Val,100).
 
         

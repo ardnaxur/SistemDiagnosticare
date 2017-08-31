@@ -16,25 +16,25 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Irina
+ * @author Talida
  */
 public class ExpeditorMesaje extends Thread{
     Socket s;
     CititorMesaje cm;
-    volatile PipedOutputStream pos=null;
+    volatile PipedOutputStream pos = null;
     volatile PipedInputStream pis;
     OutputStream ostream;
-    volatile boolean gata=false;
+    volatile boolean gata = false;
 
     //setteri sincronizati
     public final synchronized void setPipedOutputStream(PipedOutputStream _pos){
-        pos=_pos;
+        pos = _pos;
         notify();
     }
     
     //getteri sincronizati
     public synchronized PipedOutputStream getPipedOutputStream() throws InterruptedException{
-        if(pos==null){
+        if(pos == null){
             wait();
         }
         return pos;
@@ -42,21 +42,21 @@ public class ExpeditorMesaje extends Thread{
     
     
     public ExpeditorMesaje(CititorMesaje _cm) throws IOException{
-        cm=_cm;
-        pis=new PipedInputStream();
+        cm = _cm;
+        pis = new PipedInputStream(50000);
         setPipedOutputStream(new PipedOutputStream(pis));
 
     }
     
     public void trimiteMesajSicstus(String mesaj) throws InterruptedException{
-        PipedOutputStream pos= getPipedOutputStream();
+        PipedOutputStream pos = getPipedOutputStream();
         PrintStream ps=new PrintStream(pos);
         ps.println(mesaj+".");
         ps.flush();
     }
 
     public void trimiteSirSicstus(String mesaj) throws InterruptedException{
-        PipedOutputStream pos= getPipedOutputStream();
+        PipedOutputStream pos = getPipedOutputStream();
         PrintStream ps=new PrintStream(pos);
         ps.println(mesaj);
         ps.flush();
@@ -64,10 +64,10 @@ public class ExpeditorMesaje extends Thread{
     
     public void run(){
         try {
-            s=cm.getSocket();
-            ostream=s.getOutputStream();
+            s = cm.getSocket();
+            ostream = s.getOutputStream();
             int chr;
-            while((chr=pis.read())!=-1){
+            while((chr = pis.read()) != -1){
                 ostream.write(chr);
             }
             System.out.println("gata");

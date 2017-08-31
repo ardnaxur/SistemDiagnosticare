@@ -39,7 +39,7 @@ diagnostic=cistita//fc=95.
 id_regula@5
 premise:
 [#]varsta<-adult
-[#]zona_dureroasa<-'cap'
+[#]zona_dureroasa<-'bazin'
 [#]sex<-masculin
 [#]durere_urinara
 diagnostic=prostatita//fc=70.
@@ -47,7 +47,7 @@ diagnostic=prostatita//fc=70.
 id_regula@6
 premise:
 [#]varsta<-batran
-[#]zona_dureroasa<-'cap'
+[#]zona_dureroasa<-'bazin'
 [#]sex<-masculin
 [#]durere_urinara
 diagnostic=prostatita//fc=90.
@@ -55,7 +55,7 @@ diagnostic=prostatita//fc=90.
 id_regula@7
 premise:
 [#]varsta<-batran
-[#]zona_dureroasa<-'cap'
+[#]zona_dureroasa<-'bazin'
 [#]sex<-masculin
 [#]durere_urinara
 [#]incontinenta_urinara
@@ -64,7 +64,7 @@ diagnostic=prostatita//fc=95.
 id_regula@8
 premise:
 [#]varsta<-adult
-[#]zona_dureroasa<-'cap'
+[#]zona_dureroasa<-'bazin'
 [#]sex<-masculin
 [#]durere_urinara
 [#]incontinenta_urinara
@@ -795,42 +795,42 @@ tulburari_vizuale=da//fc=95.
 
 id_regula@95
 premise:
-[#]temperatura<-'20-35'
+[#]temperatura<-'20-35 grade'
 febra=mica//fc=95.
 
 id_regula@96
 premise:
-[#]temperatura<-'36-37'
+[#]temperatura<-'36-37 grade'
 febra=deloc//fc=95.
 
 id_regula@97
 premise:
-[#]temperatura<-'37.5-50'
+[#]temperatura<-'37.5-50 grade'
 febra=mare//fc=95.
 
 id_regula@98
 premise:
-[#]nr_ani<-'0-17'
+[#]nr_ani<-'0-18 ani'
 varsta=copil//fc=95.
 
 id_regula@99
 premise:
-[#]nr_ani<-'18-50'
+[#]nr_ani<-'18-50 ani'
 varsta=adult//fc=95.
 
 id_regula@100
 premise:
-[#]nr_ani<-'50-110'
+[#]nr_ani<-'50-110 ani'
 varsta=batran//fc=95.
 
 id_regula@101
 premise:
-[#]nr_pipi<-'10-30'
+[#]nr_pipi<-'10-30 ori'
 poliurie=da//fc=95.
 
 id_regula@102
 premise:
-[#]nr_scaune_pe_zi<-'4-10'
+[#]nr_scaune_pe_zi<-'4-10 ori'
 incontinenta_fecala=da//fc=95.
 
 id_regula@103
@@ -902,31 +902,24 @@ diagnostic=ulcer//fc=90.
 [nr_ani#
 'Ce varsta aveti? (0 - 110 ani)'#
 '0-17' || '18-50' || '50-110'].
-
 [senzatie_lipsa_aer#
 'Simtiti ca nu aveti aer si ca nu puteti respira?'#
 da || nu].
-
 [sex#
 'Care este sexul dumneavoastra?'#
 feminin || masculin].
-
 [simptom_piele#
 'V-au aparut pete/prurit pe piele?'#
 pete || prurit || deloc].
-
 [pete_rosii#
 'Aveti pete rosii pe piele?'#
 da || nu].
-
 [zona_dureroasa#
 'In ce zona a corpului aveti dureri?'#
 'cap' || 'torace' || 'abdomen' || 'bazin' || 'general'].
-
 [nr_pipi#
 'De cate ori urinati pe zi?'#
 '1-9' || '10-30'].
-
 [sange_in_urina#
 'Ati observat prezenta sangelui in urina?'#
 da || nu].
@@ -1044,7 +1037,7 @@ da || nu].
 '0-1' || '2-3' || '4-10'].
 
 [lipsa_energie#
-'Va simtiti, in general, lipsit de energie?'#
+'Va simtiti, in 'general', lipsit de energie?'#
 da || nu].
 
 [ameteala#
@@ -1057,7 +1050,7 @@ da || nu].
 
 
 [plictiseala#
-'Va simtiti, in general, plictisit?'#
+'Va simtiti, in 'general', plictisit?'#
 da || nu].
 
 [tuse#
