@@ -1,4 +1,6 @@
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+:-use_module(library(sockets)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 :-use_module(library(lists)).
 :-use_module(library(system)).
 :-use_module(library(file_systems)).
@@ -11,7 +13,16 @@
 :-dynamic intrebare_curenta/3.
 :-dynamic solutie/4.
 
-not(P) :- P,!,fail.
+
+close_all:-current_stream(_,_,S),close(S),fail;true.
+curata_bc:-current_predicate(P), abolish(P,[force(true)]), fail;true.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tab(Stream,N):-N>0,write(Stream,' '),N1 is N-1, tab(Stream,N1).
+tab(_,0).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+not(P):-P,!,fail.
 not(_).
 
 scrie_lista([]) :- nl.
@@ -21,6 +32,14 @@ scrie_lista([H|T]) :-
 
 scrie_lista_c([]) :- nl.
 scrie_lista_c([H|T]) :- write(' - '), write(H), nl, scrie_lista(T).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+scrie_lista(Stream,[]):-nl(Stream),flush_output(Stream).
+
+scrie_lista(Stream,[H|T]) :-
+write(Stream,H), tab(Stream,1),
+scrie_lista(Stream,T).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 afiseaza_fapte :-
 					write('Fapte existente in baza de cunostinte:'),											% Fapte memora grupul [Atribut Valoare]
@@ -33,13 +52,14 @@ listeaza_fapte :-
 					write(Val), write(')'),
 					write(','), write(' certitudine '),
 					FC1 is integer(FC),write(FC1),
-					nl,fail.																															% fail e ca sa se intoarca la fapt(...)
-listeaza_fapte.																																	% echivalent cu sau true ca sa scapam de 'no' returnat de fail
+					nl,fail.																									% fail e ca sa se intoarca la fapt(...)
+listeaza_fapte.																						% echivalent cu sau true ca sa scapam de 'no' returnat de fail
 
 lista_float_int([],[]).
-lista_float_int([Regula|Reguli],[Regula1|Reguli1]) :- (Regula \== utiliz,				% cuvantul utiliz e in istoric cand faptul e introdus de utilizator, !=utiliz =>dedus =>id regula
-					Regula1 is integer(Regula);																						% transforma id-ul regulii in int
-					Regula == utiliz, Regula1=Regula),																		% punem direct cuvantul utiliz
+					lista_float_int([Regula|Reguli],[Regula1|Reguli1]):-
+					(Regula \== utiliz,																				% cuvantul utiliz e in istoric cand faptul e introdus de utilizator, !=utiliz =>dedus =>id regula
+					Regula1 is integer(Regula);																% transforma id-ul regulii in int
+					Regula ==utiliz, Regula1=Regula),													% punem direct cuvantul utiliz
 					lista_float_int(Reguli,Reguli1).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
