@@ -1,0 +1,14 @@
+[scop == diagnostic].
+
+[pete_rosii#
+'Aveti pete rosii pe piele?'#
+da||nu].
+
+id_regula@25
+premise:
+[#] varsta <- batran
+[#] zona_dureroasa <- abdomen
+[#] febra <- mare
+[#] varsaturi
+[#] diaree
+diagnostic=apendicita//FC= 50.
