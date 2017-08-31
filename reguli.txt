@@ -795,42 +795,42 @@ tulburari_vizuale=da//fc=95.
 
 id_regula@95
 premise:
-[#]temperatura<-'20-35 grade'
+[#]temperatura<-'20-35'
 febra=mica//fc=95.
 
 id_regula@96
 premise:
-[#]temperatura<-'36-37 grade'
+[#]temperatura<-'36-38'
 febra=deloc//fc=95.
 
 id_regula@97
 premise:
-[#]temperatura<-'37.5-50 grade'
+[#]temperatura<-'38.5-50'
 febra=mare//fc=95.
 
 id_regula@98
 premise:
-[#]nr_ani<-'0-18 ani'
+[#]nr_ani<-'0-17'
 varsta=copil//fc=95.
 
 id_regula@99
 premise:
-[#]nr_ani<-'18-50 ani'
+[#]nr_ani<-'18-50'
 varsta=adult//fc=95.
 
 id_regula@100
 premise:
-[#]nr_ani<-'50-110 ani'
+[#]nr_ani<-'50-110'
 varsta=batran//fc=95.
 
 id_regula@101
 premise:
-[#]nr_pipi<-'10-30 ori'
+[#]nr_pipi<-'10-30'
 poliurie=da//fc=95.
 
 id_regula@102
 premise:
-[#]nr_scaune_pe_zi<-'4-10 ori'
+[#]nr_scaune_pe_zi<-'4-10'
 incontinenta_fecala=da//fc=95.
 
 id_regula@103
@@ -899,6 +899,11 @@ premise:
 [#]constipatie
 diagnostic=ulcer//fc=90.
 
+id_regula@110
+premise:
+[#]nr_scaune_pe_zi<-'1-3'
+incontinenta_fecala=nu//fc=95.
+
 [nr_ani#
 'Ce varsta aveti? (0 - 110 ani)'#
 '0-17' || '18-50' || '50-110'].
@@ -925,7 +930,7 @@ cap || torace || abdomen || bazin || general].
 
 [nr_pipi#
 'De cate ori urinati pe zi?'#
-'1-9 ori' || '10-30 ori'].
+'1-9' || '10-30'].
 
 [sange_in_urina#
 'Ati observat prezenta sangelui in urina?'#
@@ -1041,7 +1046,7 @@ da || nu].
 
 [nr_scaune_pe_zi#
 'Cate scaune aveti, in medie, pe zi?'#
-'0-1 ori' || '2-3 ori' || '4-10 ori'].
+'1-3' || '4-10'].
 
 [lipsa_energie#
 'Va simtiti, in general, lipsit de energie?'#
