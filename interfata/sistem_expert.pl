@@ -11,6 +11,7 @@
 :-dynamic interogabil/3.
 :-dynamic regula/3.
 :-dynamic intrebare_curenta/3.
+:-dynamic solutie/4.
 
 
 close_all:-current_stream(_,_,S),close(S),fail;true.
@@ -24,10 +25,13 @@ tab(_,0).
 not(P):-P,!,fail.
 not(_).
 
-scrie_lista([]):-nl.
+scrie_lista([]) :- nl.
 scrie_lista([H|T]) :-
 					write(H), tab(1),
 					scrie_lista(T).
+
+scrie_lista_c([]) :- nl.
+scrie_lista_c([H|T]) :- write(' - '), write(H), nl, scrie_lista_c(T).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 scrie_lista(Stream,[]):-nl(Stream),flush_output(Stream).
@@ -86,17 +90,20 @@ executa([_|_]) :-
 
 scopuri_princ :-
 						scop(Atr),
-						determina(Atr), setof(sol(Atr,Val,FC),G^fapt(av(Atr,Val),FC,G),L),
+						determina(Atr), 
+						setof(sol(Atr,Val,FC),G^fapt(av(Atr,Val),FC,G),L),
 						lista_rev(L,LNou),
 						afiseaza_scop(Atr).
 scopuri_princ:-write('Nu s-au gasit solutii.') .
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 scopuri_princ(Stream) :-
-scop(Atr),determina(Stream,Atr), setof(sol(Atr,Val,FC),G^fapt(av(Atr,Val),FC,G),L),
-						lista_rev(L,LNou),afiseaza_scop(Stream,Atr),fail.
-
-scopuri_princ(_).
+						scop(Atr),
+						determina(Stream,Atr), 
+						setof(sol(Atr,Val,FC),G^fapt(av(Atr,Val),FC,G),L),
+						lista_rev(L,LNou),
+						afiseaza_scop(Stream,Atr),fail.
+scopuri_princ:- write(Stream,'Nu s-au gasit solutii'),flush_output(Stream). 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 lista_rev(L1,L2) :- listaaux(L1,[],L2).
@@ -110,15 +117,27 @@ determina(_).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 determina(Stream,Atr) :-
 realizare_scop(Stream,av(Atr,_),_,[scop(Atr)]),!.
-
 determina(_,_).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-afiseaza_scop(Atr) :-
-						nl,fapt(av(Atr,Val),FC,_),
-						FC >= 20,scrie_scop(av(Atr,Val),FC),
-						nl,fail.
-afiseaza_scop(_):-nl,nl.
+afiseaza_scop(Atr) :- nl,fapt(av(Atr,Val),FC,_),
+											FC >= 20,scrie_scop(av(Atr,Val),FC),											% afiseaza doar scopurile relevante (cu FC>=20)
+											nl,fail.
+
+afiseaza_scop(_) :- nl, nl.
+
+scrie_scop(av(Atr,Val),FC) :- solutie(Val, Imagine, Descriere, Contraindicatii),
+															write('Solutie: '), write(Val), nl,
+															write('FC: '), FC1 is integer(FC), write(FC1), nl,
+															write('Detalii: '), write(Descriere), nl,
+															write('Contraindicatii: '), nl,
+															scrie_lista_c(Contraindicatii), nl,
+															write('%%%%%%%%%%%%%%%%%%%%%%%%').
+
+
+scrie_scop1(av(Atr,Val),FC) :- transformare(av(Atr,Val), X), scrie_lista(X),			% AFISEAZA SOLUTIA % scrie listele (atribut,valoare) ca text pentru un scop
+															tab(2),write(' '),write('FC este '),							%scrie_scop1 e sscris de profa si rescris ca scrie_scop
+										
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 afiseaza_scop(Stream, Atr) :-
@@ -127,6 +146,7 @@ FC >= 20,format(Stream,"s(~p este ~p cu fc ~p)",[Atr,Val, FC]),
 nl(Stream),flush_output(Stream),fail.
 
 afiseaza_scop(_,_):-write('a terminat'),nl.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 scrie_scop(av(Atr,Val),FC) :-
@@ -285,8 +305,8 @@ interogheaza(Stream,Atr,Mesaj,[da,nu],Istorie) :-
 	asserta( fapt(av(Atr,Val),FC,[utiliz]) ).
 
 interogheaza(Stream,Atr,Mesaj,Optiuni,Istorie) :-
-	write('\n Intrebareee atr val multiple\n'),
-	write(Stream,Mesaj),nl(Stream),flush_output(Stream),
+	write('\n Intrebare atr val multiple\n'),
+	write(Stream,i(Mesaj)),nl(Stream),flush_output(Stream),
 	citeste_opt(Stream,VLista,Optiuni,Istorie),
 	assert_fapt(Atr,VLista).
 
@@ -721,7 +741,13 @@ proceseaza_termen_citit(Stream, X, _):- % cand vrem sa-i spunem "Pa"
 				(X == end_of_file ; X == exit),
 				write(gata),nl,
 				close(Stream).
-				
+
+proceseaza_termen_citit(Stream, comanda(reset),C):-
+				write(Stream,'Resetare\n'),
+                                flush_output(Stream),
+                                executa([reinitiaza]),
+				C1 is C+1, close(Stream),
+				proceseaza_text_primit(Stream,C1).				
 			
 proceseaza_termen_citit(Stream, Altceva,C):- %cand ii trimitem sistemului expert o comanda pe care n-o pricepe
 				write(Stream,'ce vrei, neica, de la mine?! '),write(Stream,Altceva),nl(Stream),
