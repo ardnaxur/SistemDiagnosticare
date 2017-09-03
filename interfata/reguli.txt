@@ -3,7 +3,7 @@
 id_regula@1
 premise:
 [#]varsta<-adult
-[#]zona_dureroasa<-'bazin'
+[#]zona_dureroasa<-bazin
 [#]sex<-feminin
 [#]durere_urinara
 diagnostic=cistita//fc=70.
@@ -11,7 +11,7 @@ diagnostic=cistita//fc=70.
 id_regula@2
 premise:
 [#]varsta<-batran
-[#]zona_dureroasa<-'bazin'
+[#]zona_dureroasa<-bazin
 [#]sex<-feminin
 [#]durere_urinara
 diagnostic=cistita//fc=80.
@@ -19,7 +19,7 @@ diagnostic=cistita//fc=80.
 id_regula@3
 premise:
 [#]varsta<-adult
-[#]zona_dureroasa<-'bazin'
+[#]zona_dureroasa<-bazin
 [#]sex<-feminin
 [#]durere_urinara
 [#]poliurie
@@ -29,7 +29,7 @@ diagnostic=cistita//fc=90.
 id_regula@4
 premise:
 [#]varsta<-batran
-[#]zona_dureroasa<-'bazin'
+[#]zona_dureroasa<-bazin
 [#]sex<-feminin
 [#]durere_urinara
 [#]poliurie
@@ -39,7 +39,7 @@ diagnostic=cistita//fc=95.
 id_regula@5
 premise:
 [#]varsta<-adult
-[#]zona_dureroasa<-'bazin'
+[#]zona_dureroasa<-bazin
 [#]sex<-masculin
 [#]durere_urinara
 diagnostic=prostatita//fc=70.
@@ -47,7 +47,7 @@ diagnostic=prostatita//fc=70.
 id_regula@6
 premise:
 [#]varsta<-batran
-[#]zona_dureroasa<-'bazin'
+[#]zona_dureroasa<-bazin
 [#]sex<-masculin
 [#]durere_urinara
 diagnostic=prostatita//fc=90.
@@ -55,7 +55,7 @@ diagnostic=prostatita//fc=90.
 id_regula@7
 premise:
 [#]varsta<-batran
-[#]zona_dureroasa<-'bazin'
+[#]zona_dureroasa<-bazin
 [#]sex<-masculin
 [#]durere_urinara
 [#]incontinenta_urinara
@@ -64,7 +64,7 @@ diagnostic=prostatita//fc=95.
 id_regula@8
 premise:
 [#]varsta<-adult
-[#]zona_dureroasa<-'bazin'
+[#]zona_dureroasa<-bazin
 [#]sex<-masculin
 [#]durere_urinara
 [#]incontinenta_urinara
@@ -73,7 +73,7 @@ diagnostic=prostatita//fc=94.
 id_regula@9
 premise:
 [#]varsta<-batran
-[#]zona_dureroasa<-'general'
+[#]zona_dureroasa<-general
 [#]tuse<-deloc
 [#]stranut
 [#]lacrimare<-slaba
@@ -82,7 +82,7 @@ diagnostic=alergie//fc=60.
 id_regula@10
 premise:
 [#]varsta<-adult
-[#]zona_dureroasa<-'general'
+[#]zona_dureroasa<-general
 [#]tuse<-deloc
 [#]stranut
 [#]lacrimare<-slaba
@@ -91,7 +91,7 @@ diagnostic=alergie//fc=90.
 id_regula@11
 premise:
 [#]varsta<-adult
-[#]zona_dureroasa<-'general'
+[#]zona_dureroasa<-general
 [#]tuse<-deloc
 [#]stranut
 [#]lacrimare<-slaba
@@ -100,7 +100,7 @@ diagnostic=alergie//fc=80.
 id_regula@12
 premise:
 [#]varsta<-adult
-[#]zona_dureroasa<-'general'
+[#]zona_dureroasa<-general
 [#]tuse<-productiva
 [#]stranut
 diagnostic=raceala//fc=95.
@@ -108,7 +108,7 @@ diagnostic=raceala//fc=95.
 id_regula@13
 premise:
 [#]varsta<-adult
-[#]zona_dureroasa<-'general'
+[#]zona_dureroasa<-general
 [#]tuse<-seaca
 [#]stranut
 diagnostic=raceala//fc=90.
@@ -116,7 +116,7 @@ diagnostic=raceala//fc=90.
 id_regula@14
 premise:
 [#]varsta<-batran
-[#]zona_dureroasa<-'general'
+[#]zona_dureroasa<-general
 [#]tuse<-productiva
 [#]stranut
 diagnostic=raceala//fc=85.
@@ -124,7 +124,7 @@ diagnostic=raceala//fc=85.
 id_regula@15
 premise:
 [#]varsta<-batran
-[#]zona_dureroasa<-'general'
+[#]zona_dureroasa<-general
 [#]tuse<-seaca
 [#]stranut
 diagnostic=raceala//fc=80.
@@ -132,7 +132,7 @@ diagnostic=raceala//fc=80.
 id_regula@16
 premise:
 [#]varsta<-copil
-[#]zona_dureroasa<-'general'
+[#]zona_dureroasa<-general
 [#]tuse<-productiva
 [#]stranut
 diagnostic=raceala//fc=94.
@@ -140,7 +140,7 @@ diagnostic=raceala//fc=94.
 id_regula@17
 premise:
 [#]varsta<-copil
-[#]zona_dureroasa<-'general'
+[#]zona_dureroasa<-general
 [#]tuse<-seaca
 [#]stranut
 diagnostic=raceala//fc=89.
@@ -148,7 +148,7 @@ diagnostic=raceala//fc=89.
 id_regula@18
 premise:
 [#]varsta<-copil
-[#]zona_dureroasa<-'general'
+[#]zona_dureroasa<-general
 [#]tuse<-seaca
 [#]not[stranut]
 [#]secretie_nazala
@@ -158,7 +158,7 @@ diagnostic=rujeola//fc=95.
 id_regula@19
 premise:
 [#]varsta<-copil
-[#]zona_dureroasa<-'general'
+[#]zona_dureroasa<-general
 [#]tuse<-productiva
 [#]not[stranut]
 [#]secretie_nazala
@@ -177,7 +177,7 @@ diagnostic=rujeola//fc=89.
 id_regula@21
 premise:
 [#]varsta<-adult
-[#]zona_dureroasa<-'general'
+[#]zona_dureroasa<-general
 [#]tuse<-seaca
 [#]not[stranut]
 [#]secretie_nazala
@@ -187,7 +187,7 @@ diagnostic=rujeola//fc=60.
 id_regula@22
 premise:
 [#]varsta<-adult
-[#]zona_dureroasa<-'general'
+[#]zona_dureroasa<-general
 [#]tuse<-productiva
 [#]not[stranut]
 [#]secretie_nazala
@@ -197,7 +197,7 @@ diagnostic=rujeola//fc=55.
 id_regula@23
 premise:
 [#]varsta<-copil
-[#]zona_dureroasa<-'abdomen'
+[#]zona_dureroasa<-abdomen
 [#]febra<-mare
 [#]varsaturi
 [#]diaree
@@ -208,7 +208,7 @@ diagnostic=apendicita//fc=85.
 id_regula@24
 premise:
 [#]varsta<-adult
-[#]zona_dureroasa<-'abdomen'
+[#]zona_dureroasa<-abdomen
 [#]febra<-mare
 [#]varsaturi
 [#]diaree
@@ -219,7 +219,7 @@ diagnostic=apendicita//fc=90.
 id_regula@25
 premise:
 [#]varsta<-batran
-[#]zona_dureroasa<-'abdomen'
+[#]zona_dureroasa<-abdomen
 [#]febra<-mare
 [#]varsaturi
 [#]diaree
@@ -230,7 +230,7 @@ diagnostic=apendicita//fc=50.
 id_regula@26
 premise:
 [#]varsta<-batran
-[#]zona_dureroasa<-'abdomen'
+[#]zona_dureroasa<-abdomen
 [#]febra<-deloc
 [#]varsaturi
 [#]constipatie
@@ -240,7 +240,7 @@ diagnostic=ocluzie_intestinala//fc=95.
 id_regula@27
 premise:
 [#]varsta<-adult
-[#]zona_dureroasa<-'abdomen'
+[#]zona_dureroasa<-abdomen
 [#]febra<-deloc
 [#]varsaturi
 [#]constipatie
@@ -250,7 +250,7 @@ diagnostic=ocluzie_intestinala//fc=85.
 id_regula@28
 premise:
 [#]varsta<-copil
-[#]zona_dureroasa<-'abdomen'
+[#]zona_dureroasa<-abdomen
 [#]febra<-deloc
 [#]varsaturi
 [#]constipatie
@@ -260,7 +260,7 @@ diagnostic=ocluzie_intestinala//fc=45.
 id_regula@29
 premise:
 [#]varsta<-copil
-[#]zona_dureroasa<-'general'
+[#]zona_dureroasa<-general
 [#]febra<-mare
 [#]eczema_piele_prurit
 [#]frisoane
@@ -269,7 +269,7 @@ diagnostic=varicela//fc=95.
 id_regula@30
 premise:
 [#]varsta<-copil
-[#]zona_dureroasa<-'general'
+[#]zona_dureroasa<-general
 [#]eczema_piele_prurit
 [#]frisoane
 diagnostic=varicela//fc=90.
@@ -277,7 +277,7 @@ diagnostic=varicela//fc=90.
 id_regula@31
 premise:
 [#]varsta<-adult
-[#]zona_dureroasa<-'general'
+[#]zona_dureroasa<-general
 [#]febra<-mare
 [#]eczema_piele_prurit
 [#]frisoane
@@ -286,7 +286,7 @@ diagnostic=varicela//fc=65.
 id_regula@32
 premise:
 [#]varsta<-copil
-[#]zona_dureroasa<-'general'
+[#]zona_dureroasa<-general
 [#]febra<-mare
 [#]eczema_piele_prurit
 [#]edem
@@ -295,7 +295,7 @@ diagnostic=rubeola//fc=95.
 id_regula@33
 premise:
 [#]varsta<-copil
-[#]zona_dureroasa<-'general'
+[#]zona_dureroasa<-general
 [#]eczema_piele_prurit
 [#]edem
 diagnostic=rubeola//fc=90.
@@ -303,7 +303,7 @@ diagnostic=rubeola//fc=90.
 id_regula@34
 premise:
 [#]varsta<-adult
-[#]zona_dureroasa<-'general'
+[#]zona_dureroasa<-general
 [#]febra<-mare
 [#]eczema_piele_prurit
 [#]edem
@@ -312,7 +312,7 @@ diagnostic=rubeola//fc=65.
 id_regula@35
 premise:
 [#]varsta<-adult
-[#]zona_dureroasa<-'cap'
+[#]zona_dureroasa<-cap
 [#]cefalee
 [#]expunere_solara
 diagnostic=insolatie//fc=95.
@@ -320,7 +320,7 @@ diagnostic=insolatie//fc=95.
 id_regula@36
 premise:
 [#]varsta<-copil
-[#]zona_dureroasa<-'cap'
+[#]zona_dureroasa<-cap
 [#]cefalee
 [#]expunere_solara
 diagnostic=insolatie//fc=90.
@@ -328,7 +328,7 @@ diagnostic=insolatie//fc=90.
 id_regula@37
 premise:
 [#]varsta<-batran
-[#]zona_dureroasa<-'cap'
+[#]zona_dureroasa<-cap
 [#]cefalee
 [#]expunere_solara
 diagnostic=insolatie//fc=85.
@@ -339,7 +339,7 @@ premise:
 [#]varsaturi
 [#]febra<-mare
 [#]not[poliurie]
-[#]zona_dureroasa<-'abdomen'
+[#]zona_dureroasa<-abdomen
 diagnostic=litiaza_renala//fc=60.
 
 id_regula@39
@@ -347,7 +347,7 @@ premise:
 [#]varsta<-batran
 [#]lipsa_apetit
 [#]diaree
-[#]zona_dureroasa<-'abdomen'
+[#]zona_dureroasa<-abdomen
 diagnostic=litiaza_renala//fc=75.
 
 id_regula@40
@@ -357,7 +357,7 @@ premise:
 [#]febra<-mare
 [#]varsaturi
 [#]not[constipatie]
-[#]zona_dureroasa<-'abdomen'
+[#]zona_dureroasa<-abdomen
 diagnostic=litiaza_renala//fc=45.
 
 id_regula@41
@@ -366,7 +366,7 @@ premise:
 [#]febra<-mare
 [#]varsaturi
 [#]frisoane
-[#]zona_dureroasa<-'abdomen'
+[#]zona_dureroasa<-abdomen
 diagnostic=litiaza_biliara//fc=65.
 
 id_regula@42
@@ -375,7 +375,7 @@ premise:
 [#]febra<-mare
 [#]varsaturi
 [#]frisoane
-[#]zona_dureroasa<-'abdomen'
+[#]zona_dureroasa<-abdomen
 diagnostic=litiaza_biliara//fc=85.
 
 id_regula@43
@@ -384,7 +384,7 @@ premise:
 [#]febra<-mare
 [#]diaree
 [#]frisoane
-[#]zona_dureroasa<-'abdomen'
+[#]zona_dureroasa<-abdomen
 diagnostic=litiaza_biliara//fc=45.
 
 id_regula@44
@@ -393,7 +393,7 @@ premise:
 [#]vedere_incetosata
 [#]diaree
 [#]oboseala
-[#]zona_dureroasa<-'abdomen'
+[#]zona_dureroasa<-abdomen
 diagnostic=intoxicatie_alim//fc=70.
 
 id_regula@45
@@ -402,7 +402,7 @@ premise:
 [#]vedere_incetosata
 [#]diaree
 [#]oboseala
-[#]zona_dureroasa<-'abdomen'
+[#]zona_dureroasa<-abdomen
 diagnostic=intoxicatie_alim//fc=65.
 
 id_regula@46
@@ -411,7 +411,7 @@ premise:
 [#]vedere_incetosata
 [#]diaree
 [#]oboseala
-[#]zona_dureroasa<-'abdomen'
+[#]zona_dureroasa<-abdomen
 diagnostic=intoxicatie_alim//fc=60.
 
 id_regula@47
@@ -421,7 +421,7 @@ premise:
 [#]frisoane
 [#]cefalee
 [#]fotofobie
-[#]zona_dureroasa<-'cap'
+[#]zona_dureroasa<-cap
 diagnostic=migrena//fc=65.
 
 id_regula@48
@@ -431,7 +431,7 @@ premise:
 [#]frisoane
 [#]cefalee
 [#]fotofobie
-[#]zona_dureroasa<-'cap'
+[#]zona_dureroasa<-cap
 diagnostic=migrena//fc=60.
 
 id_regula@49
@@ -441,7 +441,7 @@ premise:
 [#]frisoane
 [#]cefalee
 [#]fotofobie
-[#]zona_dureroasa<-'cap'
+[#]zona_dureroasa<-cap
 diagnostic=migrena//fc=55.
 
 id_regula@50
@@ -451,7 +451,7 @@ premise:
 [#]febra<-mare
 [#]not[secretie_nazala]
 [#]not[varsaturi]
-[#]zona_dureroasa<-'torace'
+[#]zona_dureroasa<-torace
 diagnostic=bronsita//fc=65.
 
 id_regula@51
@@ -462,7 +462,7 @@ premise:
 [#]wheezing
 [#]not[varsaturi]
 [#]sputa
-[#]zona_dureroasa<-'torace'
+[#]zona_dureroasa<-torace
 diagnostic=bronsita//fc=75.
 
 id_regula@52
@@ -472,7 +472,7 @@ premise:
 [#]febra<-mare
 [#]not[secretie_nazala]
 [#]not[varsaturi]
-[#]zona_dureroasa<-'torace'
+[#]zona_dureroasa<-torace
 diagnostic=bronsita//fc=70.
 
 id_regula@53
@@ -480,7 +480,7 @@ premise:
 [#]varsta<-adult
 [#]cefalee
 [#]nas_infundat
-[#]zona_dureroasa<-'cap'
+[#]zona_dureroasa<-cap
 diagnostic=sinuzita//fc=80.
 
 id_regula@54
@@ -490,7 +490,7 @@ premise:
 [#]cefalee
 [#]nas_infundat
 [#]febra<-mare
-[#]zona_dureroasa<-'cap'
+[#]zona_dureroasa<-cap
 diagnostic=sinuzita//fc=75.
 
 id_regula@55
@@ -499,7 +499,7 @@ premise:
 [#]tuse<-seaca
 [#]cefalee
 [#]nas_infundat
-[#]zona_dureroasa<-'cap'
+[#]zona_dureroasa<-cap
 diagnostic=sinuzita//fc=50.
 
 id_regula@56
@@ -508,7 +508,7 @@ premise:
 [#]vedere_incetosata
 [#]secretie_alb_galbuie
 [#]not[cefalee]
-[#]zona_dureroasa<-'cap'
+[#]zona_dureroasa<-cap
 diagnostic=conjunctivita//fc=65.
 
 id_regula@57
@@ -517,7 +517,7 @@ premise:
 [#]vedere_incetosata
 [#]secretie_alb_galbuie
 [#]not[cefalee]
-[#]zona_dureroasa<-'cap'
+[#]zona_dureroasa<-cap
 diagnostic=conjunctivita//fc=60.
 
 id_regula@58
@@ -526,7 +526,7 @@ premise:
 [#]vedere_incetosata
 [#]secretie_alb_galbuie
 [#]not[cefalee]
-[#]zona_dureroasa<-'cap'
+[#]zona_dureroasa<-cap
 diagnostic=conjunctivita//fc=55.
 
 id_regula@59
@@ -536,7 +536,7 @@ premise:
 [#]febra<-mare
 [#]cefalee
 [#]not[insolatie]
-[#]zona_dureroasa<-'cap'
+[#]zona_dureroasa<-cap
 diagnostic=meningita//fc=55.
 
 id_regula@60
@@ -546,7 +546,7 @@ premise:
 [#]febra<-mare
 [#]cefalee
 [#]not[insolatie]
-[#]zona_dureroasa<-'cap'
+[#]zona_dureroasa<-cap
 diagnostic=meningita//fc=60.
 
 id_regula@61
@@ -556,7 +556,7 @@ premise:
 [#]febra<-mare
 [#]cefalee
 [#]not[insolatie]
-[#]zona_dureroasa<-'cap'
+[#]zona_dureroasa<-cap
 diagnostic=meningita//fc=65.
 
 
@@ -565,7 +565,7 @@ premise:
 [#]varsta<-adult
 [#]not[varsaturi]
 [#]senzatie_arsura_abdominala
-[#]zona_dureroasa<-'abdomen'
+[#]zona_dureroasa<-abdomen
 diagnostic=gastrita//fc=60.
 
 id_regula@63
@@ -573,7 +573,7 @@ premise:
 [#]varsta<-batran
 [#]not[varsaturi]
 [#]senzatie_arsura_abdominala
-[#]zona_dureroasa<-'abdomen'
+[#]zona_dureroasa<-abdomen
 diagnostic=gastrita//fc=65.
 
 id_regula@64
@@ -581,7 +581,7 @@ premise:
 [#]varsta<-copil
 [#]not[varsaturi]
 [#]senzatie_arsura_abdominala
-[#]zona_dureroasa<-'abdomen'
+[#]zona_dureroasa<-abdomen
 diagnostic=gastrita//fc=55.
 
 id_regula@65
@@ -590,7 +590,7 @@ premise:
 [#]varsaturi
 [#]senzatie_arsura_abdominala
 [#]incontinenta_fecala
-[#]zona_dureroasa<-'abdomen'
+[#]zona_dureroasa<-abdomen
 diagnostic=ulcer//fc=65.
 
 id_regula@66
@@ -599,7 +599,7 @@ premise:
 [#]varsaturi
 [#]senzatie_arsura_abdominala
 [#]incontinenta_fecala
-[#]zona_dureroasa<-'abdomen'
+[#]zona_dureroasa<-abdomen
 diagnostic=ulcer//fc=70.
 
 id_regula@67
@@ -608,7 +608,7 @@ premise:
 [#]varsaturi
 [#]senzatie_arsura_abdominala
 [#]incontinenta_fecala
-[#]zona_dureroasa<-'abdomen'
+[#]zona_dureroasa<-abdomen
 diagnostic=ulcer//fc=45.
 
 id_regula@68
@@ -618,7 +618,7 @@ premise:
 [#]not[secretie_nazala]
 [#]febra<-mare
 [#]frisoane
-[#]zona_dureroasa<-'torace'
+[#]zona_dureroasa<-torace
 diagnostic=pneumonie//fc=65.
 
 id_regula@69
@@ -628,7 +628,7 @@ premise:
 [#]not[secretie_nazala]
 [#]febra<-mare
 [#]frisoane
-[#]zona_dureroasa<-'torace'
+[#]zona_dureroasa<-torace
 diagnostic=pneumonie//fc=70.
 
 id_regula@70
@@ -638,7 +638,7 @@ premise:
 [#]not[secretie_nazala]
 [#]febra<-mare
 [#]frisoane
-[#]zona_dureroasa<-'torace'
+[#]zona_dureroasa<-torace
 diagnostic=pneumonie//fc=50.
 
 id_regula@71
@@ -670,7 +670,7 @@ frisoane=da//fc=95.
 id_regula@75
 premise:
 [#]insomnie
-[#]durere_'cap'<-slaba
+[#]durere_cap<-slaba
 oboseala=da//fc=85.
 
 id_regula@76
@@ -689,7 +689,7 @@ oboseala=da//fc=90.
 
 id_regula@78
 premise:
-[#]durere_'cap'<-puternica
+[#]durere_cap<-puternica
 [#]durere_spate<-slaba
 oboseala=da//fc=80.
 
@@ -709,13 +709,13 @@ id_regula@81
 premise:
 [#]febra<-mare
 [#]durere_gat
-[#]durere_'cap'<-slaba
+[#]durere_cap<-slaba
 umflarea_amigdalelor=da//fc=95.
 
 id_regula@82
 premise:
 [#]febra<-mare
-[#]durere_'cap'<-puternica
+[#]durere_cap<-puternica
 umflarea_amigdalelor=da//fc=90.
 
 id_regula@83
@@ -742,7 +742,7 @@ edem=da//fc=95.
 
 id_regula@86
 premise:
-[#]durere_'cap'<-puternica
+[#]durere_cap<-puternica
 cefalee=da//fc=95.
 
 id_regula@87
@@ -760,7 +760,7 @@ nas_infundat=da//fc=95.
 id_regula@89
 premise:
 [#]secretie_ochi
-[#]culoare_secretie<-alb_galbui
+[#]culoare_secretie
 secretie_alb_galbuie=da//fc=95.
 
 id_regula@90
@@ -795,42 +795,42 @@ tulburari_vizuale=da//fc=95.
 
 id_regula@95
 premise:
-[#]temperatura<-'20-35 grade'
+[#]temperatura<-'20-35'
 febra=mica//fc=95.
 
 id_regula@96
 premise:
-[#]temperatura<-'36-37 grade'
+[#]temperatura<-'36-38'
 febra=deloc//fc=95.
 
 id_regula@97
 premise:
-[#]temperatura<-'37.5-50 grade'
+[#]temperatura<-'38.5-50'
 febra=mare//fc=95.
 
 id_regula@98
 premise:
-[#]nr_ani<-'0-18 ani'
+[#]nr_ani<-'0-17'
 varsta=copil//fc=95.
 
 id_regula@99
 premise:
-[#]nr_ani<-'18-50 ani'
+[#]nr_ani<-'18-50'
 varsta=adult//fc=95.
 
 id_regula@100
 premise:
-[#]nr_ani<-'50-110 ani'
+[#]nr_ani<-'50-110'
 varsta=batran//fc=95.
 
 id_regula@101
 premise:
-[#]nr_pipi<-'10-30 ori'
+[#]nr_pipi<-'10-30'
 poliurie=da//fc=95.
 
 id_regula@102
 premise:
-[#]nr_scaune_pe_zi<-'4-10 ori'
+[#]nr_scaune_pe_zi<-'4-10'
 incontinenta_fecala=da//fc=95.
 
 id_regula@103
@@ -845,7 +845,7 @@ diaree=da//fc=95.
 id_regula@104
 premise:
 [#]varsta<-copil
-[#]zona_dureroasa<-'abdomen'
+[#]zona_dureroasa<-abdomen
 [#]febra<-mare
 [#]cefalee
 [#]diaree
@@ -855,7 +855,7 @@ diagnostic=icter//fc=90.
 id_regula@105
 premise:
 [#]varsta<-adult
-[#]zona_dureroasa<-'abdomen'
+[#]zona_dureroasa<-abdomen
 [#]febra<-mare
 [#]cefalee
 [#]diaree
@@ -865,7 +865,7 @@ diagnostic=icter//fc=85.
 id_regula@106
 premise:
 [#]varsta<-batran
-[#]zona_dureroasa<-'abdomen'
+[#]zona_dureroasa<-abdomen
 [#]febra<-mare
 [#]cefalee
 [#]diaree
@@ -874,7 +874,7 @@ diagnostic=icter//fc=70.
 
 id_regula@107
 premise:
-[#]zona_dureroasa<-'bazin'
+[#]zona_dureroasa<-bazin
 [#]sex<-masculin
 [#]durere_urinara
 diagnostic=prostatita//fc=65.
@@ -882,7 +882,7 @@ diagnostic=prostatita//fc=65.
 id_regula@108
 premise:
 [#]varsta<-adult
-[#]zona_dureroasa<-'general'
+[#]zona_dureroasa<-general
 [#]eczema_piele_prurit
 [#]frisoane
 [#]not[stranut]
@@ -892,41 +892,53 @@ diagnostic=varicela//fc=60.
 id_regula@109
 premise:
 [#]varsta<-adult
-[#]zona_dureroasa<-'abdomen'
+[#]zona_dureroasa<-abdomen
 [#]febra<-mare
 [#]varsaturi
 [#]senzatie_arsura_abdominala
 [#]constipatie
 diagnostic=ulcer//fc=90.
 
+id_regula@110
+premise:
+[#]nr_scaune_pe_zi<-'1-3'
+incontinenta_fecala=nu//fc=95.
+
 [nr_ani#
 'Ce varsta aveti? (0 - 110 ani)'#
 '0-17' || '18-50' || '50-110'].
+
 [senzatie_lipsa_aer#
 'Simtiti ca nu aveti aer si ca nu puteti respira?'#
 da || nu].
+
 [sex#
 'Care este sexul dumneavoastra?'#
 feminin || masculin].
+
 [simptom_piele#
 'V-au aparut pete/prurit pe piele?'#
 pete || prurit || deloc].
+
 [pete_rosii#
 'Aveti pete rosii pe piele?'#
 da || nu].
+
 [zona_dureroasa#
 'In ce zona a corpului aveti dureri?'#
-'cap' || 'torace' || 'abdomen' || 'bazin' || 'general'].
+cap || torace || abdomen || bazin || general].
+
 [nr_pipi#
 'De cate ori urinati pe zi?'#
 '1-9' || '10-30'].
+
 [sange_in_urina#
 'Ati observat prezenta sangelui in urina?'#
 da || nu].
 
 [temperatura#
 'Ce temperatura aveti? (grade)'#
-'20-35' || '36-38' || '39-50'].
+'20-35' || '36-38' || '38.5-50'].
 
 [transpiratie#
 'Transpirati excesiv?'#
@@ -952,8 +964,8 @@ deloc || slaba || puternica].
 'Aveti durere abdominala?'#
 deloc || slaba || puternica].
 
-[durere_'cap'#
-'Aveti dureri de 'cap'?'#
+[durere_cap#
+'Aveti dureri de cap?'#
 deloc || slaba || puternica].
 
 [durere_in_piept#
@@ -1017,8 +1029,8 @@ da || nu].
 da || nu].
 
 [culoare_secretie#
-'Ce culoare are secretia?'#
-alb_galbui || galbena || verde].
+'Secretia este alb-galbuie?'#
+da || nu].
 
 [secretie_nazala#
 'Aveti secretie nazala?'#
@@ -1034,10 +1046,10 @@ da || nu].
 
 [nr_scaune_pe_zi#
 'Cate scaune aveti, in medie, pe zi?'#
-'0-1' || '2-3' || '4-10'].
+'1-3' || '4-10'].
 
 [lipsa_energie#
-'Va simtiti, in 'general', lipsit de energie?'#
+'Va simtiti, in general, lipsit de energie?'#
 da || nu].
 
 [ameteala#
@@ -1048,9 +1060,8 @@ da || nu].
 'Prezentati durere la urinare?'#
 da || nu].
 
-
 [plictiseala#
-'Va simtiti, in 'general', plictisit?'#
+'Va simtiti, in general, plictisit?'#
 da || nu].
 
 [tuse#
@@ -1060,10 +1071,6 @@ deloc || seaca || productiva].
 [lacrimare#
 'Prezentati simptome de lacrimare a ochilor?'#
 deloc || slaba || puternica].
-
-[greata#
-'Aveti stari de greata?'#
-da || nu].
 
 [mancarimi#
 'Aveti mancarimi?'#
@@ -1075,4 +1082,8 @@ da || nu].
 
 [incontinenta_urinara#
 'Va este greu sa controlati urinarea?'#
+da || nu].
+
+[greata#
+'Aveti stari de greata?'#
 da || nu].

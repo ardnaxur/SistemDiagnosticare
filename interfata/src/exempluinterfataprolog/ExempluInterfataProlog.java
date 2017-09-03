@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  * @author Irina
  */
 public class ExempluInterfataProlog {
-    static final int PORT = 5008;
+    static final int PORT=5007;
     
     /**
      * @param args the command line arguments
@@ -27,7 +27,7 @@ public class ExempluInterfataProlog {
         ConexiuneProlog cxp;
         
         try {            
-            final Fereastra fereastra=new Fereastra("Diagnostic");
+            final Fereastra fereastra=new Fereastra("Exemplu Interfata Prolog");
             
             cxp=new ConexiuneProlog(PORT,fereastra);
             fereastra.setConexiune(cxp);
