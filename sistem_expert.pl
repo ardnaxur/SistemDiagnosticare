@@ -1,6 +1,4 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-:-use_module(library(sockets)).
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 :-use_module(library(lists)).
 :-use_module(library(system)).
 :-use_module(library(file_systems)).
@@ -12,17 +10,10 @@
 :-dynamic regula/3.
 :-dynamic intrebare_curenta/3.
 :-dynamic solutie/4.
+:-dynamic nume/2.
+:-dynamic directorOut/1.
 
-
-close_all:-current_stream(_,_,S),close(S),fail;true.
-curata_bc:-current_predicate(P), abolish(P,[force(true)]), fail;true.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-tab(Stream,N):-N>0,write(Stream,' '),N1 is N-1, tab(Stream,N1).
-tab(_,0).
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-not(P):-P,!,fail.
+not(P) :- P,!,fail.
 not(_).
 
 scrie_lista([]) :- nl.
@@ -31,15 +22,7 @@ scrie_lista([H|T]) :-
 					scrie_lista(T).
 
 scrie_lista_c([]) :- nl.
-scrie_lista_c([H|T]) :- write(' - '), write(H), nl, scrie_lista(T).
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-scrie_lista(Stream,[]):-nl(Stream),flush_output(Stream).
-
-scrie_lista(Stream,[H|T]) :-
-write(Stream,H), tab(Stream,1),
-scrie_lista(Stream,T).
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+scrie_lista_c([H|T]) :- write(' - '), write(H), nl, scrie_lista_c(T).
 
 afiseaza_fapte :-
 					write('Fapte existente in baza de cunostinte:'),											% Fapte memora grupul [Atribut Valoare]
@@ -52,14 +35,13 @@ listeaza_fapte :-
 					write(Val), write(')'),
 					write(','), write(' certitudine '),
 					FC1 is integer(FC),write(FC1),
-					nl,fail.																									% fail e ca sa se intoarca la fapt(...)
-listeaza_fapte.																						% echivalent cu sau true ca sa scapam de 'no' returnat de fail
+					nl,fail.																															% fail e ca sa se intoarca la fapt(...)
+listeaza_fapte.																																	% echivalent cu sau true ca sa scapam de 'no' returnat de fail
 
 lista_float_int([],[]).
-					lista_float_int([Regula|Reguli],[Regula1|Reguli1]):-
-					(Regula \== utiliz,																				% cuvantul utiliz e in istoric cand faptul e introdus de utilizator, !=utiliz =>dedus =>id regula
-					Regula1 is integer(Regula);																% transforma id-ul regulii in int
-					Regula ==utiliz, Regula1=Regula),													% punem direct cuvantul utiliz
+lista_float_int([Regula|Reguli],[Regula1|Reguli1]) :- (Regula \== utiliz,				% cuvantul utiliz e in istoric cand faptul e introdus de utilizator, !=utiliz =>dedus =>id regula
+					Regula1 is integer(Regula);																						% transforma id-ul regulii in int
+					Regula == utiliz, Regula1=Regula),																		% punem direct cuvantul utiliz
 					lista_float_int(Reguli,Reguli1).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -141,22 +123,29 @@ dem1([H|T],Val_actuala,Val_finala,Istorie,OptiuniUrm,MesajUrm) :-
 						dem1(T,Val_interm,Val_finala,Istorie,OptiuniUrm,MesajUrm) ;true).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-pornire :-  retractall(interogat(_)),																						% instantieaza meniu
-						retractall(fapt(_,_,_)),
+pornire :-  retractall(interogat(_)), retractall(fapt(_,_,_)),retractall(nume(_,_)),
 						retractall(intrebare_curenta(_,_,_)),
+						incarca('reguli.txt'), incarca_input('input.txt'),
+						executa([nume]),
 						repeat,
 						write('Introduceti una din urmatoarele optiuni: '),
 						nl,nl,
 						write(' (Incarca Consulta Reinitiaza  Afisare_fapte  Cum   Iesire)'),
 						nl,nl,write('|: '),citeste_linie([H|T]),
 						executa([H|T]), H == iesire.
+
+executa([nume]):-write('Introduceti numele dumneavoastra: '),nl, nl, write('|: '), citeste_linie_nume(L), proceseaza_nume(L).
+proceseaza_nume(L) :- trad_n(R,L,[]), asserta(R), !.
+trad_n(nume(Nume,Prenume)) --> [Nume, Prenume].
+proceseaza_nume([_]) :- write('Nu ati introdus numele corect! '), nl.
 																																								% optiuni meniu:
 executa([incarca]) :- incarca,!,nl,
+
 											write('Fisierul dorit a fost incarcat'),nl.
 
-executa([consulta]) :- scopuri_princ,!.
+executa([consulta]) :- scopuri_princ, !.
 
-executa([reinitiaza]) :- retractall(interogat(_)), retractall(fapt(_,_,_)),!.
+executa([reinitiaza]) :- retractall(interogat(_)), retractall(fapt(_,_,_)),retractall(nume(_,_)),write('*'),!.
 
 executa([afisare_fapte]) :- afiseaza_fapte,!.	 																	% AFISEAZA FAPTELE DIN SISTEMUL EXPERT
 
@@ -168,9 +157,42 @@ executa([_|_]) :- write('Comanda incorecta! '), nl.
 
 scopuri_princ :- scop(Atr), determina(Atr),																			% pune intrebarile pentru scop
 								 setof(sol(Atr,Val,FC),G^fapt(av(Atr,Val),FC,G),L),							% setof(?Element, :Scop, ?Lista) - pune in Lista toate valorile lui Element care ideplinesc Scop
-								 lista_rev(L,LNou), afiseaza_scop(Atr).
+								 lista_rev(L,LNou),afiseaza_scop(Atr),													%afisare solutie
+								 datime(T), datime(Y,M,D,H,Min,S) = T,
+								 prelucrare_timp_ts(Y,M,D,H,Min,S,F),
+								 creare_t(F).
 
 scopuri_princ :- write('Nu s-au gasit solutii.').
+
+prelucrare_timp_ts(A1,L1,Z1,O1,M1,S1, F):- number_chars(A1,A), adauga_lista_car('_',A, F1),
+																					 number_chars(L1,L), adauga_lista_car(F1,L, F2),
+																					 number_chars(Z1,Z), adauga_lista_car(F2,Z, F3),
+																					number_chars(O1,O), adauga_lista_car(F3,O, F4),
+																					number_chars(M1,M), adauga_lista_car(F4,M, F5),
+																					number_chars(S1,S), adauga_lista_car(F5,S, F).
+
+prelucrare_timp(A1,L1,Z1,O1,M1,S1, F):- number_chars(A1,A), adauga_lista_car('[',A, F1), %adauga_lista_car(F1,'/', F11),
+																				number_chars(L1,L), adauga_lista_car('/',L, F2), adauga_lista_car(F11,F2, F22),
+																				number_chars(Z1,Z), adauga_lista_car(F22,Z, F3), adauga_lista_car(F3,'###', F33).
+																				number_chars(O1,O), adauga_lista_car(F33,O, F4), adauga_lista_car(F4,'/', F44),
+																				number_chars(M1,M), adauga_lista_car(F44,M, F5), adauga_lista_car(F5,'/', F55),
+																				number_chars(S1,S), adauga_lista_car(F55,S, F6), adauga_lista_car(F6,']', F).
+
+
+adauga_lista_car(L,[],L).
+adauga_lista_car(F,[H1|T1], F1):- atom_concat(F,H1,F2), adauga_lista_car(F2, T1, F1).
+
+
+creare_t(Time):- (directory_exists('output_sistem_expert'),!;										%creare director output
+							make_directory('output_sistem_expert'), close_all_streams),
+							(directory_exists('output_sistem_expert/utilizatori'),!;				%creare director output
+							make_directory('output_sistem_expert/utilizatori'), close_all_streams),
+							nume(Nume,Prenume), atom_concat(Prenume, '_', Prenume2), atom_concat(Prenume2, Nume, U), atom_concat('output_sistem_expert/utilizatori/', U, D),
+							(directory_exists(D),!;																				%creare director output
+							make_directory(D), close_all_streams),
+							atom_concat(D, '/',D1), atom_concat('t', Time, T1), atom_concat(D1, T1, Dff), atom_concat(Dff, '.txt', Df),
+							open(Df, write, Stream).
+							%(directory_exists(Df),!;make_directory(Df), close_all_streams).
 
 lista_rev(L1,L2) :- listaaux(L1,[],L2).																					% reverse lista
 listaaux([],Laux,Laux).
@@ -185,7 +207,7 @@ afiseaza_scop(Atr) :- nl,fapt(av(Atr,Val),FC,_),
 
 afiseaza_scop(_) :- nl, nl.
 
-scrie_scop(av(Atr,Val),FC) :- solutie(Val, Imagine, Descriere, Contraindicatii),
+scrie_scop(av(Atr,Val),FC) :-  transformare(av(Atr,Val), X),scrie_lista(X),   solutie(Val, Imagine, Descriere, Contraindicatii),
 															write('Solutie: '), write(Val), nl,
 															write('FC: '), FC1 is integer(FC), write(FC1), nl,
 															write('Detalii: '), write(Descriere), nl,
@@ -499,4 +521,34 @@ caracter_cuvant(C):-member(C,[44,59,58,63,33,46,41,40, 91, 93, 35, 124, 47, 61, 
 caractere_in_interiorul_unui_cuvant(C):-
 							C>64,C<91;C>47,C<58;
 							C==45;C==95;C>96,C<123.
-							caracter_numar(C):-C<58,C>=48.
+
+caracter_numar(C):-C<58,C>=48.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+citeste_linie_nume([Cuv|Lista_cuv]) :- get_code(Car),citeste_nume(Car, Cuv, Car1),rest_cuvinte_linie_nume(Car1, Lista_cuv).
+
+rest_cuvinte_linie_nume(-1, []) :- !.
+rest_cuvinte_linie_nume(Car,[]) :- (Car==13;Car==10), !.
+rest_cuvinte_linie_nume(Car,[Cuv1|Lista_cuv]) :- citeste_nume(Car,Cuv1,Car1), rest_cuvinte_linie_nume(Car1,Lista_cuv).
+
+citeste_nume(-1,end_of_file,-1):-!.
+citeste_nume(Caracter,Cuvant,Caracter1) :- caracter_cuvant(Caracter),!, name(Cuvant, [Caracter]),get_code(Caracter1).
+citeste_nume(Caracter, Numar, Caracter1) :- caracter_numar(Caracter),!, name(Cuvant, [Caracter]),get_code(Caracter1).
+
+citeste_nume(Caracter,Cuvant,Caracter1) :- caractere_in_interiorul_unui_nume(Caracter),!,
+																					((Caracter>64,Caracter<91),!,Caracter_modificat is Caracter+32;
+																					Caracter_modificat is Caracter),
+																					citeste_intreg_numele(Caractere,Caracter1),
+																					name(Cuvant,[Caracter_modificat|Caractere]).
+
+citeste_intreg_numele(Lista_Caractere,Caracter1) :- get_code(Caracter),
+																										(caractere_in_interiorul_unui_nume(Caracter),
+																										((Caracter>64,Caracter<91),!, Caracter_modificat is Caracter+32;Caracter_modificat is Caracter),
+																										citeste_intreg_numele(Lista_Caractere1, Caracter1),Lista_Caractere=[Caracter_modificat|Lista_Caractere1];
+																										\+(caractere_in_interiorul_unui_nume(Caracter)),Lista_Caractere=[], Caracter1=Caracter).
+
+citeste_nume(_,Cuvant,Caracter1) :-get_code(Caracter),citeste_nume(Caracter,Cuvant,Caracter1).
+
+caractere_in_interiorul_unui_nume(C):- C>64,C<91; C==45;C>96,C<123.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
