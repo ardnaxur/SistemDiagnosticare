@@ -5,18 +5,27 @@
  */
 package exempluinterfataprolog;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.io.PipedOutputStream;
 import java.io.PrintStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 /**
  *
@@ -52,14 +61,14 @@ public class Fereastra extends javax.swing.JFrame {
         b_incarca = new javax.swing.JButton();
         b_consulta = new javax.swing.JButton();
         tfFisier = new javax.swing.JTextField();
-        b_reset = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        imagine = new javax.swing.JLabel();
+        tfFisierInput = new javax.swing.JTextField();
+        b_incarca_input = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(40, 168, 179));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setMinimumSize(new java.awt.Dimension(523, 700));
-        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         textAreaDebug.setColumns(20);
@@ -78,7 +87,7 @@ public class Fereastra extends javax.swing.JFrame {
                 b_incarcaActionPerformed(evt);
             }
         });
-        getContentPane().add(b_incarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 70, -1, -1));
+        getContentPane().add(b_incarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
 
         b_consulta.setBackground(new java.awt.Color(40, 168, 179));
         b_consulta.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
@@ -88,7 +97,7 @@ public class Fereastra extends javax.swing.JFrame {
                 b_consultaActionPerformed(evt);
             }
         });
-        getContentPane().add(b_consulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 480, -1, -1));
+        getContentPane().add(b_consulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 480, -1, -1));
 
         tfFisier.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tfFisier.setText("'reguli.txt'");
@@ -98,21 +107,30 @@ public class Fereastra extends javax.swing.JFrame {
                 tfFisierActionPerformed(evt);
             }
         });
-        getContentPane().add(tfFisier, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 130, -1));
+        getContentPane().add(tfFisier, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 130, -1));
 
-        b_reset.setBackground(new java.awt.Color(40, 168, 179));
-        b_reset.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
-        b_reset.setText("x");
-        b_reset.setToolTipText("Resetare");
-        b_reset.addActionListener(new java.awt.event.ActionListener() {
+        imagine.setIcon(new javax.swing.ImageIcon(getClass().getResource("/exempluinterfataprolog/medic.png"))); // NOI18N
+        getContentPane().add(imagine, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 310, 363));
+
+        tfFisierInput.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tfFisierInput.setText("'input.txt'");
+        tfFisierInput.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(40, 168, 179), 5, true));
+        tfFisierInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                b_resetActionPerformed(evt);
+                tfFisierInputActionPerformed(evt);
             }
         });
-        getContentPane().add(b_reset, new org.netbeans.lib.awtextra.AbsoluteConstraints(491, 0, 40, 30));
+        getContentPane().add(tfFisierInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 40, 130, -1));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/exempluinterfataprolog/medic.png"))); // NOI18N
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 310, 363));
+        b_incarca_input.setBackground(new java.awt.Color(40, 168, 179));
+        b_incarca_input.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        b_incarca_input.setText("Incarca input");
+        b_incarca_input.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_incarca_inputActionPerformed(evt);
+            }
+        });
+        getContentPane().add(b_incarca_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 70, 130, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -142,8 +160,10 @@ public class Fereastra extends javax.swing.JFrame {
     private void b_consultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_consultaActionPerformed
        
         this.remove(this.b_incarca);
+        this.remove(this.b_incarca_input);
         this.remove(this.b_consulta);
-        //this.remove(this.tfFisier);
+        this.remove(this.tfFisier);
+        this.remove(this.tfFisierInput);
         
         this.setLayout(new FlowLayout());
         this.add(this.panou_intrebari);
@@ -160,35 +180,30 @@ public class Fereastra extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_b_consultaActionPerformed
 
-    private void b_resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_resetActionPerformed
+    private void tfFisierInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfFisierInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfFisierInputActionPerformed
 
-        this.remove(this.b_incarca);
-        this.remove(this.b_consulta);
-        this.remove(this.tfFisier);
-        this.remove(this.panou_intrebari);
-        this.remove(this.textAreaDebug);
-        this.remove(this.jScrollPane1);
-        this.remove(this.jLabel2);
-        this.remove(this.b_reset);
+    private void b_incarca_inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_incarca_inputActionPerformed
         
-        this.repaint();
-        this.revalidate();
-        
+        Fereastra.AFISAT_SOLUTII=false;
+        String valoareParametru=tfFisierInput.getText();
+        tfFisier.setEnabled(false);
+        String dir=System.getProperty("user.dir");
+        dir=dir.replace("\\", "/");
         try {
-            conexiune.expeditor.trimiteMesajSicstus("comanda(reset)");
+            conexiune.expeditor.trimiteMesajSicstus("director('"+dir+"')");
+            conexiune.expeditor.trimiteMesajSicstus("incarca_input("+valoareParametru+")");
             
         
         } catch (InterruptedException ex) {
             Logger.getLogger(Fereastra.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        panou_intrebari=new Intrebare_intrebatoare();
-        initComponents();
-    }//GEN-LAST:event_b_resetActionPerformed
+    }//GEN-LAST:event_b_incarca_inputActionPerformed
 
     
      private void optiuneButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
-       
        
         String raspuns= ((JButton)(evt.getSource())).getText();
         try {
@@ -200,10 +215,6 @@ public class Fereastra extends javax.swing.JFrame {
         }
     }  
     
-    
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -236,6 +247,44 @@ public class Fereastra extends javax.swing.JFrame {
             }
         });
     }
+    
+        private void b_afisareActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        
+        try {
+         conexiune.expeditor.trimiteMesajSicstus("fapte");
+        
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Fereastra.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }                                         
+
+    
+        private void b_resetActionPerformed(java.awt.event.ActionEvent evt) {                                        
+
+        this.remove(this.b_incarca);
+        this.remove(this.b_incarca_input);
+        this.remove(this.b_consulta);
+        this.remove(this.tfFisier);
+        this.remove(this.tfFisierInput);
+        this.remove(this.panou_intrebari);
+        this.remove(this.textAreaDebug);
+        this.remove(this.jScrollPane1);
+        this.remove(this.imagine);
+        this.remove(this.b_reset);
+        this.remove(this.b_afisare);
+
+        this.repaint();
+        this.revalidate();
+
+        try {
+            conexiune.expeditor.trimiteMesajSicstus("comanda(reset)");
+
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Fereastra.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        panou_intrebari=new Intrebare_intrebatoare();
+        initComponents();
+    }  
 
     public javax.swing.JTextArea getDebugTextArea(){
         return textAreaDebug;
@@ -272,50 +321,80 @@ public class Fereastra extends javax.swing.JFrame {
     }  
 
      public void setSolutie(String solutie){
-        if(!Fereastra.AFISAT_SOLUTII)
+        
+         this.remove(this.imagine);
+//        this.panou_intrebari.label_intrebare.setText("<html><body style='width:100%;'>"+solutie+"</html>");
+//        this.panou_intrebari.repaint();
+
+        b_reset.setBackground(new java.awt.Color(40, 168, 179));
+        b_reset.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
+        b_reset.setText("Resetare");
+        b_reset.setToolTipText("Resetare");
+        b_reset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_resetActionPerformed(evt);
+            }
+        });
+        getContentPane().add(b_reset, new org.netbeans.lib.awtextra.AbsoluteConstraints(491, 0, 40, 30));
+        
+        
+        b_afisare.setBackground(new java.awt.Color(40, 168, 179));
+        b_afisare.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        b_afisare.setText("Afisare fapte");
+        b_afisare.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_afisareActionPerformed(evt);
+            }
+        });
+        getContentPane().add(b_afisare, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 130, -1));
+
+         if(!Fereastra.AFISAT_SOLUTII)
         {
             this.panou_intrebari.removeAll();
             this.panou_intrebari.setLayout(new FlowLayout());
             Fereastra.AFISAT_SOLUTII=true;
         }
 
-        JLabel jsol=new JLabel(solutie);
+        JTextArea jsol=new JTextArea(solutie);
+        jsol.setColumns(40);
+        jsol.setRows(6);
+        jsol.setLineWrap(true);         
         this.panou_intrebari.add(jsol);
-       
 
         this.panou_intrebari.repaint();
         this.panou_intrebari.revalidate();
-        //this.revalidate();
+        this.revalidate();
     } 
      
-     public void setFaraSolutie(String solutie){
+     public void afiseaza_imagine(String path) throws IOException{
+//        BufferedImage imagined = ImageIO.read(new File(path));
+//         ImageIcon icon = new ImageIcon(imagined);
+//         JLabel label = new JLabel(icon);
+//         JOptionPane.showMessageDialog(null, label);
          
-        if(!Fereastra.AFISAT_SOLUTII)
-        {
-            this.panou_intrebari.removeAll();
-            this.panou_intrebari.setLayout(new FlowLayout());
-            Fereastra.AFISAT_SOLUTII=true;
-        }
-           
-        JLabel jsol=new JLabel(solutie);
-        
-        this.panou_intrebari.add(jsol);
-       
-        this.panou_intrebari.repaint();
-        this.panou_intrebari.revalidate();
-        //this.revalidate();
-    } 
+            ImageIcon image = new ImageIcon(path);
+            JLabel label = new JLabel("", image, JLabel.CENTER);
+            this.add( label, BorderLayout.CENTER );
+
+
+//        JLabel imagined = new JLabel();
+//        imagined.setIcon(new ImageIcon(getClass().getResource(path))); // NOI18N
+//        getContentPane().add(imagined, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 310, 363));
+     }
+    
     
     public static boolean AFISAT_SOLUTII=false;
-    
+    JButton b_reset=new JButton();
+    JButton b_afisare=new JButton();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton b_consulta;
     private javax.swing.JButton b_incarca;
-    private javax.swing.JButton b_reset;
+    private javax.swing.JButton b_incarca_input;
     private javax.swing.ButtonGroup grupBtn;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel imagine;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea textAreaDebug;
     private javax.swing.JTextField tfFisier;
+    private javax.swing.JTextField tfFisierInput;
     // End of variables declaration//GEN-END:variables
 }

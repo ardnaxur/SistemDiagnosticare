@@ -5,6 +5,10 @@
  */
 package exempluinterfataprolog;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author Irina
@@ -70,4 +74,6 @@ public class Intrebare_intrebatoare extends javax.swing.JPanel {
     public javax.swing.JLabel label_intrebare;
     public javax.swing.JPanel panou_optiuni;
     // End of variables declaration//GEN-END:variables
+
+
 }

@@ -5,12 +5,14 @@
  */
 package exempluinterfataprolog;
 
+import java.io.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
@@ -84,7 +86,15 @@ public class CititorMesaje extends Thread {
                         public void run(){ 
                             conexiune.getFereastra().getDebugTextArea().append(sirDeScris); 
                             String text=sirDeScris.trim();
-                            //verific daca e intrebare
+                            
+                             if(text.contains("QQ"))
+                            {
+                                String[] parts = text.split("QQ");
+                                String intrebare=parts[1] + "\n" + parts[2] + "\n" + parts[3];
+                                conexiune.getFereastra().afiseaza_imagine("C:/Users/Talida/Desktop/ExempluInterfataProlog/ExempluInterfataProlog - 2" + parts[0].substring(2, parts[0].length()-1));
+                                conexiune.getFereastra().setSolutie(intrebare);
+                                
+                            }
                             if(text.length()>2 && text.charAt(0)=='i'&& text.charAt(1)=='(' && text.charAt(text.length()-1)==')')
                             {
                                 String intrebare=text.substring(2, text.length()-1);
