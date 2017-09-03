@@ -93,9 +93,9 @@ pornire :-
             nl,nl,write('|: '),citeste_linie([H|T]),
             executa([H|T]), H == iesire.
 
-proceseaza_nume(L) :- trad_n(R,L,[]), asserta(R), !. 
+proceseaza_nume(L) :- trad_n(R,L,[]), asserta(R), !.
 trad_n(nume(Nume,Prenume)) --> [Nume, Prenume].
-proceseaza_nume([_]) :- write('Nu ati introdus numele corect! '), nl.
+proceseaza_nume([_]) :- write('Nu ati introdus numele corect! '), write(Stream,'Nu ati introdus numele corect! '), nl.
 																																								% optiuni meniu:
 executa([incarca]) :- incarca,!,nl,
                       write('Fisierul dorit a fost incarcat'),nl.
@@ -119,20 +119,28 @@ scopuri_princ :-scop(Atr),
 				
 scopuri_princ:- write('Nu s-au gasit solutii.') .
 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%interfata%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+scopuri_princ(Stream) :-scop(Atr), 
+                        determina(Stream,Atr), 
+                        setof(sol(Atr,Val,FC),G^fapt(av(Atr,Val),FC,G),L), 
+                        lista_rev(L,LNou), 
+                        afiseaza_scop(Stream,Atr),
+						datime(T), datime(Y,M,D,H,Min,S) = T,
+						prelucrare_timp_ts(Y,M,D,H,Min,S,F),
+						creare_t(F).
+						
+scopuri_princ(Stream):- write('Nu sunt solutii\n'), write(Stream, s('Nu s-au gasit solutii.')), nl(Stream), flush_output(Stream). 
+
 prelucrare_timp_ts(A1,L1,Z1,O1,M1,S1, F):- number_chars(A1,A), adauga_lista_car('_',A, F1),
 										 number_chars(L1,L), adauga_lista_car(F1,L, F2),
 										 number_chars(Z1,Z), adauga_lista_car(F2,Z, F3),
 										 number_chars(O1,O), adauga_lista_car(F3,O, F4),
 										 number_chars(M1,M), adauga_lista_car(F4,M, F5),
 										 number_chars(S1,S), adauga_lista_car(F5,S, F).
-
-prelucrare_timp(A1,L1,Z1,O1,M1,S1, F):- number_chars(A1,A), adauga_lista_car('[',A, F1), %adauga_lista_car(F1,'/', F11),
-										number_chars(L1,L), adauga_lista_car('/',L, F2), adauga_lista_car(F11,F2, F22),
-										number_chars(Z1,Z), adauga_lista_car(F22,Z, F3), adauga_lista_car(F3,'###', F33),
-										number_chars(O1,O), adauga_lista_car(F33,O, F4), adauga_lista_car(F4,'/', F44),
-										number_chars(M1,M), adauga_lista_car(F44,M, F5), adauga_lista_car(F5,'/', F55),
-										number_chars(S1,S), adauga_lista_car(F55,S, F6), adauga_lista_car(F6,']', F).
-
 
 adauga_lista_car(L,[],L).
 adauga_lista_car(F,[H1|T1], F1):- atom_concat(F,H1,F2), adauga_lista_car(F2, T1, F1).
@@ -148,20 +156,6 @@ creare_t(Time):- (directory_exists('output_sistem_expert'),!;										%creare d
 					atom_concat(D, '/',D1), atom_concat('t', Time, T1), atom_concat(D1, T1, Dff), atom_concat(Dff, '.txt', Df),
 					open(Df, write, Stream).
 					%(directory_exists(Df),!;make_directory(Df), close_all_streams).
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%interfata%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-scopuri_princ(Stream) :-scop(Atr), 
-                        determina(Stream,Atr), 
-                        setof(sol(Atr,Val,FC),G^fapt(av(Atr,Val),FC,G),L), 
-                        lista_rev(L,LNou), 
-                        afiseaza_scop(Stream,Atr),
-						datime(T), datime(Y,M,D,H,Min,S) = T,
-						prelucrare_timp_ts(Y,M,D,H,Min,S,F),
-						creare_t(F).
-						
-scopuri_princ(Stream):- write('Nu sunt solutii\n'), write(Stream, s('Nu s-au gasit solutii.') ), nl(Stream), flush_output(Stream). 																																							% optiuni meniu
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -718,29 +712,29 @@ caractere_in_interiorul_unui_cuvant(C):- C>64,C<91;C>47,C<58;
 caracter_numar(C):-C<58,C>=48.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-citeste_linie_nume([Cuv|Lista_cuv]) :- get_code(Car),citeste_nume( Car, Cuv, Car1),rest_cuvinte_linie_nume(Car1, Lista_cuv).
+citeste_linie_nume(Stream, [Cuv|Lista_cuv]) :- get_code(Stream, Car),citeste_nume(Stream, Car, Cuv, Car1),rest_cuvinte_linie_nume(Stream,Car1, Lista_cuv).
 
 rest_cuvinte_linie_nume(_, -1, []) :- !.
-rest_cuvinte_linie_nume(Car,[]) :- (Car==13;Car==10), !.
-rest_cuvinte_linie_nume(Car,[Cuv1|Lista_cuv]) :- citeste_nume(Car,Cuv1,Car1), rest_cuvinte_linie_nume(Car1,Lista_cuv).
+rest_cuvinte_linie_nume(Stream,Car,[]) :- (Car==13;Car==10), !.
+rest_cuvinte_linie_nume(Stream,Car,[Cuv1|Lista_cuv]) :- citeste_nume(Stream,Car,Cuv1,Car1), rest_cuvinte_linie_nume(Stream,Car1,Lista_cuv).
 
 citeste_nume(_,-1,end_of_file,-1):-!.
-citeste_nume(Caracter,Cuvant,Caracter1) :- caracter_cuvant(Caracter),!, name(Cuvant, [Caracter]),get_code(Caracter1).
-citeste_nume(Caracter, Numar, Caracter1) :- caracter_numar(Caracter),!, name(Cuvant, [Caracter]),get_code(Caracter1).
+citeste_nume(Stream,Caracter,Cuvant,Caracter1) :- caracter_cuvant(Caracter),!, name(Cuvant, [Caracter]),get_code(Stream,Caracter1).
+citeste_nume(Stream,Caracter, Numar, Caracter1) :- caracter_numar(Caracter),!, name(Cuvant, [Caracter]),get_code(Stream,Caracter1).
 
-citeste_nume(Caracter,Cuvant,Caracter1) :- caractere_in_interiorul_unui_nume(Caracter),!,
+citeste_nume(Stream,Caracter,Cuvant,Caracter1) :- caractere_in_interiorul_unui_nume(Caracter),!,
 													((Caracter>64,Caracter<91),!,Caracter_modificat is Caracter+32;
 													Caracter_modificat is Caracter),
-													citeste_intreg_numele(Caractere,Caracter1),
+													citeste_intreg_numele(Stream,Caractere,Caracter1),
 													name(Cuvant,[Caracter_modificat|Caractere]).
 
-citeste_intreg_numele(Lista_Caractere,Caracter1) :- get_code(Caracter),
+citeste_intreg_numele(Stream,Lista_Caractere,Caracter1) :- get_code(Stream,Caracter),
 															(caractere_in_interiorul_unui_nume(Caracter),
 															((Caracter>64,Caracter<91),!, Caracter_modificat is Caracter+32;Caracter_modificat is Caracter),
-															citeste_intreg_numele(Lista_Caractere1, Caracter1),Lista_Caractere=[Caracter_modificat|Lista_Caractere1];
+															citeste_intreg_numele(Stream,Lista_Caractere1, Caracter1),Lista_Caractere=[Caracter_modificat|Lista_Caractere1];
 															\+(caractere_in_interiorul_unui_nume(Caracter)),Lista_Caractere=[], Caracter1=Caracter).
 
-citeste_nume(_,Cuvant,Caracter1) :-get_code(Caracter),citeste_nume(Caracter,Cuvant,Caracter1).
+citeste_nume(Stream,_,Cuvant,Caracter1) :-get_code(Stream,Caracter),citeste_nume(Stream,Caracter,Cuvant,Caracter1).
 
 caractere_in_interiorul_unui_nume(C):- C>64,C<91; C==45;C>96,C<123.
 
@@ -754,20 +748,15 @@ inceput:- format('Salutare\n',[]),	flush_output,
             socket_client_open(localhost: Port, Stream, [type(text)]),
             proceseaza_text_primit(Stream,0).
 				
+				
 proceseaza_text_primit(Stream,C):-
-				write(inainte_de_citire),write('#######'),
+				write(inainte_de_citire),
 				read(Stream,CevaCitit),
 				write(dupa_citire),
 				write(CevaCitit),nl,
 				proceseaza_termen_citit(Stream,CevaCitit,C).
 				
-proceseaza_termen_citit(Stream,executa_nume([X]),C):- write('A intrat\n'),
-				write(Stream,'V-ati inregistrat\n'), 
-				write(X), 
-				proceseaza_nume(X),
-				C1 is C+1, 
-				proceseaza_text_primit(Stream,C1).
-				
+
 proceseaza_termen_citit(Stream,director(D),C):- %pentru a seta directorul curent
 				format(Stream,'Locatia curenta de lucru s-a deplasat la adresa ~p.',[D]),
 				format('Locatia curenta de lucru s-a deplasat la adresa ~p',[D]),
@@ -778,7 +767,13 @@ proceseaza_termen_citit(Stream,director(D),C):- %pentru a seta directorul curent
 				flush_output(Stream),
 				C1 is C+1,
 				proceseaza_text_primit(Stream,C1).				
-				
+
+proceseaza_termen_citit(Stream,executa_nume(X),C):-
+				write(Stream,'V-ati inregistrat\n'),
+				flush_output(Stream),
+				proceseaza_nume(X),
+				C1 is C+1, 
+				proceseaza_text_primit(Stream,C1).
 				
 proceseaza_termen_citit(Stream, incarca(X),C):-
 				write(Stream,'Se incarca regulile...\n'),
