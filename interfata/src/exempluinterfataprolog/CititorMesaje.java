@@ -90,10 +90,9 @@ public class CititorMesaje extends Thread {
                              if(text.contains("QQ"))
                             {
                                 String[] parts = text.split("QQ");
-                                String intrebare=parts[1] + "\n" + parts[2] + "\n" + parts[3];
+                                String intrebare=parts[1] + "\n" + parts[2] + "\n" + parts[3].substring(1,parts[3].length()) + "\n" + parts[4];
                                 conexiune.getFereastra().afiseaza_imagine("C:/Users/Talida/Desktop/ExempluInterfataProlog/ExempluInterfataProlog - 2" + parts[0].substring(2, parts[0].length()-1));
                                 conexiune.getFereastra().setSolutie(intrebare);
-                                
                             }
                             if(text.length()>2 && text.charAt(0)=='i'&& text.charAt(1)=='(' && text.charAt(text.length()-1)==')')
                             {

@@ -33,8 +33,8 @@ scrie_lista_c([]) :- nl.
 scrie_lista_c([H|T]) :- write(' - '), write(H), nl, scrie_lista_c(T).
 
 %%%%%%%%%%%%%%%%%%%%%interfata%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-scrie_lista_c(Stream, []) :- nl.
-scrie_lista_c(Stream,[H|T]) :- write(Stream,' - '), write(Stream), scrie_lista_c(Stream, T),  nl(Stream), flush_output(Stream),.
+
+scrie_lista_c(Stream,[H|T]) :- write(Stream, H), write(Stream,' , '), scrie_lista_c(Stream, T).
 
 scrie_lista(Stream,[]):-nl(Stream),flush_output(Stream).
 
@@ -155,11 +155,11 @@ afiseaza_scop(Stream,_):- nl(Stream), flush_output(Stream).
 
 scrie_scop(Stream,av(Aa,Vall),FC) :- solutie(Vall, Imagine, Descriere, Contraindicatii),
 									write(Stream,Imagine), write(Stream,'QQ'),
-                                    write(Stream, 'Diagnostic:' ), write(Stream,Vall), write(Stream,'QQ'),
-                                    write(Stream, 'FC:'), FC1 is integer(FC), write(Stream, FC1), write(Stream,'QQ'),
-                                    write(Stream,Descriere), nl(Stream), flush_output(Stream).
-                                    %write(Stream,'Contraindicatii: '), write(Stream,'^'), write(Stream,'^'),
-                                    %scrie_lista_c(Stream,Contraindicatii), write(Stream,'^'),
+                                    write(Stream, 'Diagnosticul este ' ), write(Stream,Vall), write(Stream,'QQ'),
+                                    write(Stream, 'Factor de Certitudine:'), FC1 is integer(FC), write(Stream, FC1), write(Stream,'QQ'),
+                                    write(Stream,Descriere), write(Stream,'QQ'),
+                                    write(Stream,'Contraindicatii: '),scrie_lista_c(Stream,Contraindicatii),
+									nl(Stream), flush_output(Stream).
                                     %flush_output(Stream).
 									
 								

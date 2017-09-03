@@ -272,6 +272,7 @@ public class Fereastra extends javax.swing.JFrame {
         this.remove(this.imagine);
         this.remove(this.b_reset);
         this.remove(this.b_afisare);
+        this.remove(this.label);
 
         this.repaint();
         this.revalidate();
@@ -366,14 +367,14 @@ public class Fereastra extends javax.swing.JFrame {
         this.revalidate();
     } 
      
-     public void afiseaza_imagine(String path) throws IOException{
+     public void afiseaza_imagine(String path) {
 //        BufferedImage imagined = ImageIO.read(new File(path));
 //         ImageIcon icon = new ImageIcon(imagined);
 //         JLabel label = new JLabel(icon);
 //         JOptionPane.showMessageDialog(null, label);
          
             ImageIcon image = new ImageIcon(path);
-            JLabel label = new JLabel("", image, JLabel.CENTER);
+            label = new JLabel("", image, JLabel.CENTER);
             this.add( label, BorderLayout.CENTER );
 
 
@@ -384,6 +385,7 @@ public class Fereastra extends javax.swing.JFrame {
     
     
     public static boolean AFISAT_SOLUTII=false;
+    JLabel label;
     JButton b_reset=new JButton();
     JButton b_afisare=new JButton();
     // Variables declaration - do not modify//GEN-BEGIN:variables
