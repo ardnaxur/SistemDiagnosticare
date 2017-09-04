@@ -130,8 +130,8 @@ scopuri_princ(Stream) :-scop(Atr),
                         lista_rev(L,LNou), 
                         afiseaza_scop(Stream,Atr),
 						datime(T), datime(Y,M,D,H,Min,S) = T,
-						prelucrare_timp_ts(Y,M,D,H,Min,S,F).
-						%creare_t(F).
+						prelucrare_timp_ts(Y,M,D,H,Min,S,F), write(Stream,z(F)), nl(Stream),
+						creare_t(F).
 						
 scopuri_princ(Stream):- write('Nu sunt solutii\n'), write(Stream, n('Nu s-au gasit solutii.')), nl(Stream), flush_output(Stream). 
 

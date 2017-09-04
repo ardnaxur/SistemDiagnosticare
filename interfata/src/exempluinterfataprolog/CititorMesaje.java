@@ -87,7 +87,13 @@ public class CititorMesaje extends Thread {
                             conexiune.getFereastra().getDebugTextArea().append(sirDeScris); 
                             String text=sirDeScris.trim();
                             
-                             if(text.contains("QQ") && !text.contains("Nu s-au gasit solutii."))
+                            if(text.length()>2 && text.charAt(0)=='z'&& text.charAt(1)=='(' && text.charAt(text.length()-1)==')')
+                            {
+                                String time=text.substring(2, text.length()-1);
+                                conexiune.getFereastra().setCum(time);
+                            }
+    
+                            if(text.contains("QQ") && !text.contains("Nu s-au gasit solutii."))
                             {
                                 String[] parts = text.split("QQ");
                                 String intrebare=parts[1] + "\n" + parts[2] + "\n" + parts[3].substring(1,parts[3].length()) + "\n" + parts[4];
@@ -100,6 +106,7 @@ public class CititorMesaje extends Thread {
                                 conexiune.getFereastra().setIntrebare(intrebare);
                             }
                             //verific daca sunt optiuni
+
                             else if(text.length()>2 && text.charAt(0)=='(' && text.charAt(text.length()-1)==')')
                             {
                                 conexiune.getFereastra().setOptiuni(text);             

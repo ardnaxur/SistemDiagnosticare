@@ -12,8 +12,12 @@ import java.awt.FlowLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PipedOutputStream;
 import java.io.PrintStream;
 import java.util.logging.Level;
@@ -243,14 +247,13 @@ public class Fereastra extends javax.swing.JFrame {
     private void b_trimiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_trimiteActionPerformed
         // TODO add your handling code here:
         Fereastra.AFISAT_SOLUTII=false;
-        String valoareParametru1=tfFisierNume.getText();
+        valoareParametru1=tfFisierNume.getText();
         tfFisierNume.setEnabled(false);
-        String valoareParametru2=tfFisierPrenume.getText();
+        valoareParametru2=tfFisierPrenume.getText();
         tfFisierPrenume.setEnabled(false);
         String dir=System.getProperty("user.dir");
         dir=dir.replace("\\", "/");
         
-        System.out.println("executa_nume(" + valoareParametru1 +","+ valoareParametru2 +")");
         try {
             conexiune.expeditor.trimiteMesajSicstus("director('"+dir+"')");
             //conexiune.expeditor.trimiteMesajSicstus("executa_nume(" + valoareParametru1 +")");
@@ -293,7 +296,46 @@ public class Fereastra extends javax.swing.JFrame {
         } catch (InterruptedException ex) {
             Logger.getLogger(Fereastra.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }                                         
+    }   
+    
+    private void b_cumActionPerformed(String time, java.awt.event.ActionEvent evt) {   
+        
+        String nume = valoareParametru1.substring(1, valoareParametru1.length()-1);
+        String prenume = valoareParametru2.substring(1, valoareParametru2.length()-1);
+        String file="C:/Users/Talida/Desktop/ExempluInterfataProlog/ExempluInterfataProlog - 2/output_sistem_expert/utilizatori/"+ prenume +"_"+ nume + "/d_" + time;
+        System.out.print("File:"+file);
+        try{
+                //open the file
+                FileInputStream inMessage = new FileInputStream(file);
+                // Get the object of DataInputStream
+                DataInputStream in = new DataInputStream(inMessage);
+                BufferedReader br = new BufferedReader(new InputStreamReader(in));
+                String strLine;
+                StringBuilder sb = new StringBuilder();
+                //Read File Line By Line
+                while ((strLine = br.readLine()) != null)   {
+                      // Print the content on the console
+                      System.out.println (strLine);
+                      sb.append(strLine);
+                }
+                    //Close the input stream
+                    in.close();
+                    
+                JFrame content = new JFrame("Cum?");
+                JLabel info_from_file = new JLabel(sb.toString());
+                content.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                content.getContentPane().add(info_from_file, BorderLayout.CENTER);
+                content.pack();
+                //content.add(info_from_file);
+                content.setVisible(true);
+                
+        }catch (Exception e){//Catch exception if any
+              System.err.println("Error: " + e.getMessage());
+        }
+        
+                    
+        
+    }
 
     
         private void b_resetActionPerformed(java.awt.event.ActionEvent evt) {                                        
@@ -312,6 +354,7 @@ public class Fereastra extends javax.swing.JFrame {
         this.remove(this.imagine);
         this.remove(this.b_reset);
         this.remove(this.b_afisare);
+        this.remove(this.b_cum);
         this.remove(this.label);
         
 
@@ -361,8 +404,15 @@ public class Fereastra extends javax.swing.JFrame {
         this.panou_intrebari.panou_optiuni.revalidate();
         //this.revalidate();
     }  
-
-     public void setSolutie(String solutie){
+     public void setCum(final String time){
+     
+             b_cum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    b_cumActionPerformed(time, evt);
+            }
+        });
+     }
+     public void setSolutie(final String solutie){
         
          this.remove(this.imagine);
 //        this.panou_intrebari.label_intrebare.setText("<html><body style='width:100%;'>"+solutie+"</html>");
@@ -390,6 +440,11 @@ public class Fereastra extends javax.swing.JFrame {
         });
         getContentPane().add(b_afisare, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 130, -1));
 
+        b_cum.setBackground(new java.awt.Color(40, 168, 179));
+        b_cum.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        b_cum.setText("Cum?");
+        getContentPane().add(b_cum, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 130, -1));
+        
          if(!Fereastra.AFISAT_SOLUTII)
         {
             this.panou_intrebari.removeAll();
@@ -464,6 +519,12 @@ public class Fereastra extends javax.swing.JFrame {
     JLabel label;
     JButton b_reset=new JButton();
     JButton b_afisare=new JButton();
+    JButton b_cum=new JButton();
+    
+    String valoareParametru1;
+    String valoareParametru2;
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton b_consulta;
     private javax.swing.JButton b_incarca;
