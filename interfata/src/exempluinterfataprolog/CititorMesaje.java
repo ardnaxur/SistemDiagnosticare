@@ -87,7 +87,7 @@ public class CititorMesaje extends Thread {
                             conexiune.getFereastra().getDebugTextArea().append(sirDeScris); 
                             String text=sirDeScris.trim();
                             
-                             if(text.contains("QQ"))
+                             if(text.contains("QQ") && !text.contains("Nu s-au gasit solutii."))
                             {
                                 String[] parts = text.split("QQ");
                                 String intrebare=parts[1] + "\n" + parts[2] + "\n" + parts[3].substring(1,parts[3].length()) + "\n" + parts[4];
@@ -109,6 +109,13 @@ public class CititorMesaje extends Thread {
                             {
                                 String intrebare=text.substring(2, text.length()-1);
                                 conexiune.getFereastra().setSolutie(intrebare);
+                            }
+                            
+                            if(text.length()>2 && text.charAt(0)=='n'&& text.charAt(1)=='(' && text.charAt(text.length()-1)==')')
+                            {
+                                String intrebare=text.substring(2, text.length()-1);
+                                conexiune.getFereastra().afiseaza_imagine("C:/Users/Talida/Desktop/ExempluInterfataProlog/ExempluInterfataProlog - 2/nu_solutii.png");
+                                conexiune.getFereastra().setNoSolutie(intrebare);
                             }
                         }
 

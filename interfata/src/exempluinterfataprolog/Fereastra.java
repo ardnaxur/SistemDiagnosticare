@@ -408,20 +408,55 @@ public class Fereastra extends javax.swing.JFrame {
         this.revalidate();
     } 
      
+     public void setNoSolutie(String solutie){
+        
+         this.remove(this.imagine);
+
+        b_reset.setBackground(new java.awt.Color(40, 168, 179));
+        b_reset.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
+        b_reset.setText("Resetare");
+        b_reset.setToolTipText("Resetare");
+        b_reset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_resetActionPerformed(evt);
+            }
+        });
+        getContentPane().add(b_reset, new org.netbeans.lib.awtextra.AbsoluteConstraints(491, 0, 40, 30));
+        
+        
+        b_afisare.setBackground(new java.awt.Color(40, 168, 179));
+        b_afisare.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        b_afisare.setText("Afisare fapte");
+        b_afisare.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_afisareActionPerformed(evt);
+            }
+        });
+        getContentPane().add(b_afisare, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 130, -1));
+
+         if(!Fereastra.AFISAT_SOLUTII)
+        {
+            this.panou_intrebari.removeAll();
+            this.panou_intrebari.setLayout(new FlowLayout());
+            Fereastra.AFISAT_SOLUTII=true;
+        }
+
+        JTextArea jsol=new JTextArea(solutie);
+        jsol.setColumns(40);
+        jsol.setRows(6);
+        jsol.setLineWrap(true);         
+        this.panou_intrebari.add(jsol);
+
+        this.panou_intrebari.repaint();
+        this.panou_intrebari.revalidate();
+        this.revalidate();
+    } 
+     
      public void afiseaza_imagine(String path) {
-//        BufferedImage imagined = ImageIO.read(new File(path));
-//         ImageIcon icon = new ImageIcon(imagined);
-//         JLabel label = new JLabel(icon);
-//         JOptionPane.showMessageDialog(null, label);
          
             ImageIcon image = new ImageIcon(path);
             label = new JLabel("", image, JLabel.CENTER);
             this.add( label, BorderLayout.CENTER );
-
-
-//        JLabel imagined = new JLabel();
-//        imagined.setIcon(new ImageIcon(getClass().getResource(path))); // NOI18N
-//        getContentPane().add(imagined, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 310, 363));
      }
     
     

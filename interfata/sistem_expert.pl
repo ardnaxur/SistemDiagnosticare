@@ -133,7 +133,7 @@ scopuri_princ(Stream) :-scop(Atr),
 						prelucrare_timp_ts(Y,M,D,H,Min,S,F).
 						%creare_t(F).
 						
-scopuri_princ(Stream):- write('Nu sunt solutii\n'), write(Stream, s('Nu s-au gasit solutii.')), nl(Stream), flush_output(Stream). 
+scopuri_princ(Stream):- write('Nu sunt solutii\n'), write(Stream, n('Nu s-au gasit solutii.')), nl(Stream), flush_output(Stream). 
 
 prelucrare_timp_ts(A1,L1,Z1,O1,M1,S1, F):- number_chars(A1,A), adauga_lista_car('_',A, F1),
 										 number_chars(L1,L), adauga_lista_car(F1,L, F2),

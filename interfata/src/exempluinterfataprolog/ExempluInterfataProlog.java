@@ -27,7 +27,7 @@ public class ExempluInterfataProlog {
         ConexiuneProlog cxp;
         
         try {            
-            final Fereastra fereastra=new Fereastra("Exemplu Interfata Prolog");
+            final Fereastra fereastra=new Fereastra("Sistem Diagnosticare");
             
             cxp=new ConexiuneProlog(PORT,fereastra);
             fereastra.setConexiune(cxp);
