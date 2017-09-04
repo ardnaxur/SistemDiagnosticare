@@ -12,6 +12,8 @@
 :-dynamic regula/3.
 :-dynamic intrebare_curenta/3.
 :-dynamic solutie/4.
+:-dynamic nume/2.
+:-dynamic directorOut/1.
 
 close_all:-current_stream(_,_,S),close(S),fail;true.
 curata_bc:-current_predicate(P), abolish(P,[force(true)]), fail;true.
@@ -83,6 +85,7 @@ pornire :-
             retractall(interogat(_)),
             retractall(fapt(_,_,_)),
             retractall(intrebare_curenta(_,_,_)),
+            write('Introduceti numele dumneavoastra: '),nl, nl, write('|: '), citeste_linie_nume(L), proceseaza_nume(L),
             repeat,
             write('Introduceti una din urmatoarele optiuni: '),
             nl,nl,
@@ -90,6 +93,10 @@ pornire :-
             nl,nl,write('|: '),citeste_linie([H|T]),
             executa([H|T]), H == iesire.
 
+proceseaza_nume(L) :- trad_n(R,L,[]), asserta(R), !.
+trad_n(nume(Nume,Prenume)) --> [Nume, Prenume].
+proceseaza_nume([_]) :- write('Nu ati introdus numele corect! '), write(Stream,'Nu ati introdus numele corect! '), nl.
+																																								% optiuni meniu:
 executa([incarca]) :- incarca,!,nl,
                       write('Fisierul dorit a fost incarcat'),nl.
 executa([consulta]) :- scopuri_princ,!.
@@ -105,8 +112,15 @@ scopuri_princ :-scop(Atr),
                 determina(Atr), 
                 setof(sol(Atr,Val,FC),G^fapt(av(Atr,Val),FC,G),L),
                 lista_rev(L,LNou),
-                afiseaza_scop(Atr).
+                afiseaza_scop(Atr),
+                datime(T), datime(Y,M,D,H,Min,S) = T,
+				prelucrare_timp_ts(Y,M,D,H,Min,S,F),
+				creare_t(F).
+				
 scopuri_princ:- write('Nu s-au gasit solutii.') .
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%interfata%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -114,9 +128,34 @@ scopuri_princ(Stream) :-scop(Atr),
                         determina(Stream,Atr), 
                         setof(sol(Atr,Val,FC),G^fapt(av(Atr,Val),FC,G),L), 
                         lista_rev(L,LNou), 
-                        afiseaza_scop(Stream,Atr).
+                        afiseaza_scop(Stream,Atr),
+						datime(T), datime(Y,M,D,H,Min,S) = T,
+						prelucrare_timp_ts(Y,M,D,H,Min,S,F).
+						%creare_t(F).
 						
 scopuri_princ(Stream):- write('Nu sunt solutii\n'), write(Stream, s('Nu s-au gasit solutii.')), nl(Stream), flush_output(Stream). 
+
+prelucrare_timp_ts(A1,L1,Z1,O1,M1,S1, F):- number_chars(A1,A), adauga_lista_car('_',A, F1),
+										 number_chars(L1,L), adauga_lista_car(F1,L, F2),
+										 number_chars(Z1,Z), adauga_lista_car(F2,Z, F3),
+										 number_chars(O1,O), adauga_lista_car(F3,O, F4),
+										 number_chars(M1,M), adauga_lista_car(F4,M, F5),
+										 number_chars(S1,S), adauga_lista_car(F5,S, F).
+
+adauga_lista_car(L,[],L).
+adauga_lista_car(F,[H1|T1], F1):- atom_concat(F,H1,F2), adauga_lista_car(F2, T1, F1).
+
+
+creare_t(Time):- (directory_exists('output_sistem_expert'),!;										%creare director output
+					make_directory('output_sistem_expert'), close_all_streams),
+					(directory_exists('output_sistem_expert/utilizatori'),!;				%creare director output
+					make_directory('output_sistem_expert/utilizatori'), close_all_streams),
+					nume(Nume,Prenume), atom_concat(Prenume, '_', Prenume2), atom_concat(Prenume2, Nume, U), atom_concat('output_sistem_expert/utilizatori/', U, D),
+					(directory_exists(D),!;																				%creare director output
+					make_directory(D), close_all_streams),
+					atom_concat(D, '/',D1), atom_concat('t', Time, T1), atom_concat(D1, T1, Dff), atom_concat(Dff, '.txt', Df),
+					open(Df, write, StreamR).
+					%(directory_exists(Df),!;make_directory(Df), close_all_streams).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -281,7 +320,7 @@ cum_premise([Scop|X]) :- cum(Scop),
 
 interogheaza(Atr,Mesaj,[da,nu],Istorie) :- !,write(Mesaj),nl,
                                             citeste_opt(X, [da, nu, nu_stiu, nu_conteaza], Istorie),
-%					    de_la_utiliz(X,Istorie,[da,nu,nu_stiu,nu_conteaza]),
+%					    					de_la_utiliz(X,Istorie,[da,nu,nu_stiu,nu_conteaza]),
                                             det_val_fc(X,Val,FC),
                                             asserta( fapt(av(Atr,Val),FC,[utiliz]) ).
 
@@ -672,6 +711,34 @@ caractere_in_interiorul_unui_cuvant(C):- C>64,C<91;C>47,C<58;
 					C==45;C==95;C>96,C<123.
 caracter_numar(C):-C<58,C>=48.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+citeste_linie_nume(Stream, [Cuv|Lista_cuv]) :- get_code(Stream, Car),citeste_nume(Stream, Car, Cuv, Car1),rest_cuvinte_linie_nume(Stream,Car1, Lista_cuv).
+
+rest_cuvinte_linie_nume(_, -1, []) :- !.
+rest_cuvinte_linie_nume(Stream,Car,[]) :- (Car==13;Car==10), !.
+rest_cuvinte_linie_nume(Stream,Car,[Cuv1|Lista_cuv]) :- citeste_nume(Stream,Car,Cuv1,Car1), rest_cuvinte_linie_nume(Stream,Car1,Lista_cuv).
+
+citeste_nume(_,-1,end_of_file,-1):-!.
+citeste_nume(Stream,Caracter,Cuvant,Caracter1) :- caracter_cuvant(Caracter),!, name(Cuvant, [Caracter]),get_code(Stream,Caracter1).
+citeste_nume(Stream,Caracter, Numar, Caracter1) :- caracter_numar(Caracter),!, name(Cuvant, [Caracter]),get_code(Stream,Caracter1).
+
+citeste_nume(Stream,Caracter,Cuvant,Caracter1) :- caractere_in_interiorul_unui_nume(Caracter),!,
+													((Caracter>64,Caracter<91),!,Caracter_modificat is Caracter+32;
+													Caracter_modificat is Caracter),
+													citeste_intreg_numele(Stream,Caractere,Caracter1),
+													name(Cuvant,[Caracter_modificat|Caractere]).
+
+citeste_intreg_numele(Stream,Lista_Caractere,Caracter1) :- get_code(Stream,Caracter),
+															(caractere_in_interiorul_unui_nume(Caracter),
+															((Caracter>64,Caracter<91),!, Caracter_modificat is Caracter+32;Caracter_modificat is Caracter),
+															citeste_intreg_numele(Stream,Lista_Caractere1, Caracter1),Lista_Caractere=[Caracter_modificat|Lista_Caractere1];
+															\+(caractere_in_interiorul_unui_nume(Caracter)),Lista_Caractere=[], Caracter1=Caracter).
+
+citeste_nume(Stream,_,Cuvant,Caracter1) :-get_code(Stream,Caracter),citeste_nume(Stream,Caracter,Cuvant,Caracter1).
+
+caractere_in_interiorul_unui_nume(C):- C>64,C<91; C==45;C>96,C<123.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 inceput:- format('Salutare\n',[]),	flush_output,
             prolog_flag(argv, [PortSocket|_]), %preiau numarul portului, dat ca argument cu -a
@@ -693,7 +760,6 @@ proceseaza_text_primit(Stream,C):-
 proceseaza_termen_citit(Stream,director(D),C):- %pentru a seta directorul curent
 				format(Stream,'Locatia curenta de lucru s-a deplasat la adresa ~p.',[D]),
 				format('Locatia curenta de lucru s-a deplasat la adresa ~p',[D]),
-				
 				X=current_directory(_,D),
 				write(X),
 				call(X),
@@ -701,14 +767,20 @@ proceseaza_termen_citit(Stream,director(D),C):- %pentru a seta directorul curent
 				flush_output(Stream),
 				C1 is C+1,
 				proceseaza_text_primit(Stream,C1).				
-				
+
+proceseaza_termen_citit(Stream,executa_nume(X),C):-
+				write(Stream,'V-ati inregistrat\n'),
+				flush_output(Stream),
+				proceseaza_nume(X),
+				C1 is C+1, 
+				proceseaza_text_primit(Stream,C1).
 				
 proceseaza_termen_citit(Stream, incarca(X),C):-
 				write(Stream,'Se incarca regulile...\n'),
 				flush_output(Stream),
 				incarca(X),
 				C1 is C+1,
-                                write(Stream,'S-au incarcat regulile\n'),
+				write(Stream,'S-au incarcat regulile\n'),
 				flush_output(Stream),
 				proceseaza_text_primit(Stream,C1).
 
@@ -717,7 +789,7 @@ proceseaza_termen_citit(Stream, incarca_input(X),C):-
 				flush_output(Stream),
 				incarca_input(X),
 				C1 is C+1,
-                                write(Stream,'S-a incarcat fisierul de input\n'),
+                write(Stream,'S-a incarcat fisierul de input\n'),
 				flush_output(Stream),
 				proceseaza_text_primit(Stream,C1).
 				

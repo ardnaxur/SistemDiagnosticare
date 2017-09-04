@@ -64,6 +64,9 @@ public class Fereastra extends javax.swing.JFrame {
         imagine = new javax.swing.JLabel();
         tfFisierInput = new javax.swing.JTextField();
         b_incarca_input = new javax.swing.JButton();
+        tfFisierNume = new javax.swing.JTextField();
+        b_trimite = new javax.swing.JButton();
+        tfFisierPrenume = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(40, 168, 179));
@@ -87,7 +90,7 @@ public class Fereastra extends javax.swing.JFrame {
                 b_incarcaActionPerformed(evt);
             }
         });
-        getContentPane().add(b_incarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
+        getContentPane().add(b_incarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, -1, -1));
 
         b_consulta.setBackground(new java.awt.Color(40, 168, 179));
         b_consulta.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
@@ -107,7 +110,7 @@ public class Fereastra extends javax.swing.JFrame {
                 tfFisierActionPerformed(evt);
             }
         });
-        getContentPane().add(tfFisier, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 130, -1));
+        getContentPane().add(tfFisier, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 130, -1));
 
         imagine.setIcon(new javax.swing.ImageIcon(getClass().getResource("/exempluinterfataprolog/medic.png"))); // NOI18N
         getContentPane().add(imagine, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 310, 363));
@@ -120,7 +123,7 @@ public class Fereastra extends javax.swing.JFrame {
                 tfFisierInputActionPerformed(evt);
             }
         });
-        getContentPane().add(tfFisierInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 40, 130, -1));
+        getContentPane().add(tfFisierInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 60, 130, -1));
 
         b_incarca_input.setBackground(new java.awt.Color(40, 168, 179));
         b_incarca_input.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
@@ -130,7 +133,37 @@ public class Fereastra extends javax.swing.JFrame {
                 b_incarca_inputActionPerformed(evt);
             }
         });
-        getContentPane().add(b_incarca_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 70, 130, -1));
+        getContentPane().add(b_incarca_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 90, 130, -1));
+
+        tfFisierNume.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tfFisierNume.setText("'nume'");
+        tfFisierNume.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(40, 168, 179), 5, true));
+        tfFisierNume.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfFisierNumeActionPerformed(evt);
+            }
+        });
+        getContentPane().add(tfFisierNume, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 130, -1));
+
+        b_trimite.setBackground(new java.awt.Color(40, 168, 179));
+        b_trimite.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        b_trimite.setText("Trimite");
+        b_trimite.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_trimiteActionPerformed(evt);
+            }
+        });
+        getContentPane().add(b_trimite, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 10, -1, -1));
+
+        tfFisierPrenume.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tfFisierPrenume.setText("'prenume'");
+        tfFisierPrenume.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(40, 168, 179), 5, true));
+        tfFisierPrenume.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfFisierPrenumeActionPerformed(evt);
+            }
+        });
+        getContentPane().add(tfFisierPrenume, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, 130, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -164,6 +197,9 @@ public class Fereastra extends javax.swing.JFrame {
         this.remove(this.b_consulta);
         this.remove(this.tfFisier);
         this.remove(this.tfFisierInput);
+        this.remove(this.b_trimite);
+        this.remove(this.tfFisierNume);
+        this.remove(this.tfFisierPrenume);
         
         this.setLayout(new FlowLayout());
         this.add(this.panou_intrebari);
@@ -173,8 +209,6 @@ public class Fereastra extends javax.swing.JFrame {
         this.revalidate();
         try {
             conexiune.expeditor.trimiteMesajSicstus("comanda(consulta)");
-            
-        
         } catch (InterruptedException ex) {
             Logger.getLogger(Fereastra.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -188,7 +222,7 @@ public class Fereastra extends javax.swing.JFrame {
         
         Fereastra.AFISAT_SOLUTII=false;
         String valoareParametru=tfFisierInput.getText();
-        tfFisier.setEnabled(false);
+        tfFisierInput.setEnabled(false);
         String dir=System.getProperty("user.dir");
         dir=dir.replace("\\", "/");
         try {
@@ -202,44 +236,48 @@ public class Fereastra extends javax.swing.JFrame {
         
     }//GEN-LAST:event_b_incarca_inputActionPerformed
 
+    private void tfFisierNumeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfFisierNumeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfFisierNumeActionPerformed
+
+    private void b_trimiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_trimiteActionPerformed
+        // TODO add your handling code here:
+        Fereastra.AFISAT_SOLUTII=false;
+        String valoareParametru1=tfFisierNume.getText();
+        tfFisierNume.setEnabled(false);
+        String valoareParametru2=tfFisierPrenume.getText();
+        tfFisierPrenume.setEnabled(false);
+        String dir=System.getProperty("user.dir");
+        dir=dir.replace("\\", "/");
+        
+        System.out.println("executa_nume(" + valoareParametru1 +","+ valoareParametru2 +")");
+        try {
+            conexiune.expeditor.trimiteMesajSicstus("director('"+dir+"')");
+            //conexiune.expeditor.trimiteMesajSicstus("executa_nume(" + valoareParametru1 +")");
+            conexiune.expeditor.trimiteMesajSicstus("executa_nume([" + valoareParametru1 +","+ valoareParametru2 +"])");
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Fereastra.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_b_trimiteActionPerformed
+
+    private void tfFisierPrenumeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfFisierPrenumeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfFisierPrenumeActionPerformed
+
     
      private void optiuneButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
        
         String raspuns= ((JButton)(evt.getSource())).getText();
         try {
             conexiune.expeditor.trimiteSirSicstus(raspuns);
-            
-        
         } catch (InterruptedException ex) {
             Logger.getLogger(Fereastra.class.getName()).log(Level.SEVERE, null, ex);
         }
     }  
     
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Fereastra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Fereastra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Fereastra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Fereastra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Fereastra("Verificare").setVisible(true);
@@ -248,11 +286,10 @@ public class Fereastra extends javax.swing.JFrame {
         });
     }
     
-        private void b_afisareActionPerformed(java.awt.event.ActionEvent evt) {                                          
+    private void b_afisareActionPerformed(java.awt.event.ActionEvent evt) {                                          
         
         try {
          conexiune.expeditor.trimiteMesajSicstus("fapte");
-        
         } catch (InterruptedException ex) {
             Logger.getLogger(Fereastra.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -264,7 +301,10 @@ public class Fereastra extends javax.swing.JFrame {
         this.remove(this.b_incarca);
         this.remove(this.b_incarca_input);
         this.remove(this.b_consulta);
+        this.remove(this.b_trimite);
         this.remove(this.tfFisier);
+        this.remove(this.tfFisierNume);
+        this.remove(this.tfFisierPrenume);
         this.remove(this.tfFisierInput);
         this.remove(this.panou_intrebari);
         this.remove(this.textAreaDebug);
@@ -273,6 +313,7 @@ public class Fereastra extends javax.swing.JFrame {
         this.remove(this.b_reset);
         this.remove(this.b_afisare);
         this.remove(this.label);
+        
 
         this.repaint();
         this.revalidate();
@@ -392,11 +433,14 @@ public class Fereastra extends javax.swing.JFrame {
     private javax.swing.JButton b_consulta;
     private javax.swing.JButton b_incarca;
     private javax.swing.JButton b_incarca_input;
+    private javax.swing.JButton b_trimite;
     private javax.swing.ButtonGroup grupBtn;
     private javax.swing.JLabel imagine;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea textAreaDebug;
     private javax.swing.JTextField tfFisier;
     private javax.swing.JTextField tfFisierInput;
+    private javax.swing.JTextField tfFisierNume;
+    private javax.swing.JTextField tfFisierPrenume;
     // End of variables declaration//GEN-END:variables
 }
