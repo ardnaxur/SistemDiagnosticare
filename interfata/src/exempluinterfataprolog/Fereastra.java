@@ -315,14 +315,16 @@ public class Fereastra extends javax.swing.JFrame {
                 //Read File Line By Line
                 while ((strLine = br.readLine()) != null)   {
                       // Print the content on the console
-                      System.out.println (strLine);
+                      sb.append("\n");
                       sb.append(strLine);
                 }
                     //Close the input stream
                     in.close();
                     
                 JFrame content = new JFrame("Cum?");
-                JLabel info_from_file = new JLabel(sb.toString());
+                JTextArea info_from_file = new JTextArea(sb.toString());
+                info_from_file.setLineWrap(true);
+                info_from_file.setWrapStyleWord(true);
                 content.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 content.getContentPane().add(info_from_file, BorderLayout.CENTER);
                 content.pack();
