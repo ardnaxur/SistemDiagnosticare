@@ -1,0 +1,68 @@
+diagnostic este prostatita a fost derivat cu ajutorul regulilor:  107 8 5 
+
+regula   107 
+  Daca 
+     zona_dureroasa este bazin 
+     sex este masculin 
+     durere_urinara 
+  Atunci 
+    diagnostic este prostatita 65 
+
+zona_dureroasa este bazin a fost derivat cu ajutorul regulilor:  utiliz 
+
+sex este masculin a fost derivat cu ajutorul regulilor:  utiliz 
+
+durere_urinara a fost derivat cu ajutorul regulilor:  utiliz 
+
+regula   8 
+  Daca 
+     varsta este adult 
+     zona_dureroasa este bazin 
+     sex este masculin 
+     durere_urinara 
+     incontinenta_urinara 
+  Atunci 
+    diagnostic este prostatita 94 
+
+varsta este adult a fost derivat cu ajutorul regulilor:  99 
+
+regula   99 
+  Daca 
+     nr_ani este '18-50' 
+  Atunci 
+    varsta este adult 95 
+
+nr_ani este '18-50' a fost derivat cu ajutorul regulilor:  utiliz 
+
+zona_dureroasa este bazin a fost derivat cu ajutorul regulilor:  utiliz 
+
+sex este masculin a fost derivat cu ajutorul regulilor:  utiliz 
+
+durere_urinara a fost derivat cu ajutorul regulilor:  utiliz 
+
+incontinenta_urinara a fost derivat cu ajutorul regulilor:  utiliz 
+
+regula   5 
+  Daca 
+		varsta este adult 
+     zona_dureroasa este bazin 
+     sex este masculin 
+     durere_urinara 
+  Atunci 
+    diagnostic este prostatita 70 
+
+varsta este adult a fost derivat cu ajutorul regulilor:  99 
+
+regula   99 
+  Daca 
+     nr_ani este '18-50' 
+  Atunci 
+    varsta este adult 95 
+
+nr_ani este '18-50' a fost derivat cu ajutorul regulilor:  utiliz 
+
+zona_dureroasa este bazin a fost derivat cu ajutorul regulilor:  utiliz 
+
+sex este masculin a fost derivat cu ajutorul regulilor:  utiliz 
+
+durere_urinara a fost derivat cu ajutorul regulilor:  utiliz 

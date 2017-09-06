@@ -1,0 +1,185 @@
+[alergie]
+['./imagini/alergie.jpg']
+['Alergia este o problema recunoscuta, de proportii pandemice, afectand mai mult de 150 milioane de persoane numai in Europa.Daca dezvolti o simptomatologie usoara sau moderata cand esti expus la alergeni, problema ta poate fi usor controlata cu medicamente precum anti-histaminice sau decongestionante nazale prescrise de medic.']
+[contraindicatii:
+-[evitat_condus]
+-[evitat_somnifere]
+]
+---
+[raceala]
+['./imagini/raceala.jpg']
+['Raceala este afectiunea cailor respiratorii superioare care se asociaza cu cea mai mare adresabilitate in serviciile medicale de specialitate. Adultii pot prezenta anual doua pana la cinci infectii respiratorii, in timp ce copiii pot avea intre şase şi zece raceli pe an (ajungand pana la douasprezece raceli pentru copiii de varsta şcolara).Pentru tratarea racelii va recomandam: cat mai multe lichide, odihna, vitamine si calmante pentru tuse.']
+[contraindicatii:
+-[evitat_alcool]
+-[evitat_efort]
+]
+---
+[rujeola]
+['./imagini/rujeola.jpg']
+['Virusul care provoaca rujeola este unul de tip ARN. Acesta poarta numele de virus rujeolic si face parte din genul Morbillivirus, familia Paramyxoviridae, din care se trag si virusul urlian (care determina oreionul), cel sincitial respirator (cauza a majoritatii infectiilor respiratorii servere) si virusurile parainfluenzae (responsabile de aparitia racelilor).
+In cazurile fara complicatii, rujeola este tratata prin repaus la pat si ingrijire la domiciliu. Tratamentul la domiciliu include medicamente ce nu au nevoie de prescriptie medicala si care au efect antipiretic (scad febra) si antialgic (scad durerea), asa cum este ibuprofenul sau alte medicamente din aceeasi clasa, precum paracetamolul.']
+[contraindicatii:
+-[evitat_soare]
+]
+---
+[apendicita]
+['./imagini/apendicita.jpg']
+['Apendicita este cea mai frecventa urgenta chirurgicala abdominala. Aceasta afectiune apare frecvent la varste cuprinse intre 10 si 30 de ani, dar aparitia acesteia este posibila la orice varsta, fiind cunoscute si cazuri cu manifestari particulare la bolnavii varstnici.Tratamentul standard al apendicitei este chirurgical si consta in operatia numita apendicectomie.']
+[contraindicatii:
+-[evitati_efort]
+]
+---
+[ocluzie_intestinala]
+['./imagini/ocluzie_intestinala.jpg']
+['Ocluzia intestinala este blocarea partiala sau completa a intestinului care impiedica propulsarea continutului acestuia. Blocarea poate avea loc in intestinul subtire. 
+Tratamentul pentru ocluzie intestinala este un act complex, medico-chirurgical ce se desfasoara in directia reechilibrarii hidroelectrolitice, metabolico-nutritionale si tratamentului chirurgical al ocluziei.']
+[contraindicatii:
+-[evitati_efort]
+]
+---
+[cistita]
+['./imagini/cistita.jpg']
+['Cistita reprezinta o inflamatie a mucoasei care captuseste vezica urinara, ca urmare a patrunderii bacteriilor prin uretra, canalul prin care este eliminata urina. Cistita afecteaza in special femeile, statisticile sugerand ca aproape una din 3 femei cu varste pana in 24 de ani se confrunta cu astfel de infectii ale tractului urinar.Pentru tratamentul cistitei va recomandam administrarea de antiinflamatoare (cum ar fi ibuprofenul sau paracetamolul), multe lichide si odihna.']
+[contraindicatii:
+-[evitati_efort]
+-[evitati_alcool]
+]
+---
+[varicela]
+['./imagini/varicela.jpg']
+['Varicela este o boala contagioasa cauzata de virusul zoster-varicela si se manifesta printr-o iritatie insotita de pustule si mancarime. Pentru tratarea varicelei va recomandam : izolarea la domiciliu 7-14 zile, pana la momentul disparitiei veziculelor si a crustelor, administrarea de  ibuprofen, paracetamol, algocalmin pentru reducerea febrei si cresterea cantitatii de lichide.']
+[contraindicatii:
+-[evitati_contact]
+-[evitati_scarpinare]
+-[evitati_soare]
+-[evitati_alcool]
+]
+---
+[prostatita]
+['./imagini/prostatita.jpg']
+['Prostatita este o inflamatie sau infectie a prostatei, frecventa in randul barbatilor tineri sau de varsta mijlocie. Intre 5-10% dintre barbati se confrunta cu aceasta problema pe parcursul vietii.Tratamentul este unul antibiotic, la care se pot asociaantiinflamatoare si alfa-blocanti (medicamente ce usureaza urinarile, frecvent indicate in caz de adenom de prostata).']
+[contraindicatii:
+-[evitati_scarpinare]
+-[evitati_alcool]
+]
+---
+[rubeola]
+['./imagini/rubeola.jpg']
+['Rubeola, numita si pojar german sau pojarul de 3 zile, este o boala produsa de virusul rubeolic. Virusul rubeolic se raspandeste de cele mai multe ori prin picaturi de fluid de la nivelul membranelor mucoase care contin virusul. O persoana infectata poate raspandi virusul prin picaturile de fluid din timpul tusei, stranutului, vorbirii sau prin mancare sau bauturi la comun.Tratamentul pentru rubeola: izolarea la domiciliu timp de 7-10 zile, cu repaus la pat, hidratare corespunzatoare cu: supe, ceaiuri, apa, sucuri naturale de fructe, iar daca copilul prezinta febra, se pot administra:ibuprofen, paracetamol.']
+[contraindicatii:
+-[evitati_contact]
+-[evitati_scarpinare]
+-[evitati_alcool]
+-[evitati_soare]
+-[evitati_efort]
+]
+---
+[insolatie]
+['./imagini/insolatie.jpg']
+['Cunoscuta drept una dintre cele mai periculoase boli provocate de caldura, insolatia reprezinta o situatie de urgenta in care viata persoanei afectate poate fi pusa in pericol. Temperatura corpului poate ajunge la 40 de grade celsius (sau chiar peste). Persoana care sufera de insolatie este atat de deshidratata incat pielea sa nu mai transpira si este uscata si calda la atingere.Pentru a trata victima, aceasta trebuie mutata intru-un spatiu racoros, sa nu fie sub actiunea directa a razelor solare, iar Intregul corp al pacientului trebuie racorit cu apa rece.']
+[contraindicatii:
+-[evitati_soare]
+-[evitati_alcool]
+]
+---
+[icter]
+['./imagini/icter.jpg']
+['Icterul reprezinta colorarea in galben a pielii, mucoaselor şi a albului ochilor (sclerei). Icterul este determinat de creşterea nivelului de bilirubina in sange.Icterul se trateaza in functie de cauza:Icterul hemolitic in general cu cortizon (prednison), Icterul din bolile de ficat – prin tratarea bolii care a dus la icter, Icterul mecanic, in general prin operatie clasica, laparoscopica sau endoscopica']
+[contraindicatii:
+-[evitati_soare]
+-[evitati_scarpinare]
+]
+---
+[litiaza_renala]
+['./imagini/litiaza_renala.jpg']
+['Litiaza renala (calculii renali sau nefrolitiaza) reprezinta bucati de minerale care sunt localizate la nivelul rinichiului. Acestea pot ramane la nivel renal sau pot fi eliminate din organism pe calea tractului urinar (tubii care conecteaza rinichii cu vezica urinara, numiti uretere si cel care face legatura vezicii urinare cu exteriorul – uretra). Tratamentul litiazai renale: Indometacin, Diclofenac, Ketoprofen,Celecoxib, Ketorolac,(reduc spasmul,contractiile) : Scobutil, No-Spa, Piafen']
+[contraindicatii:
+-[evitati_alcool]
+-[evitati_efort]
+]
+---
+[litiaza_biliara]
+['./imagini/litiaza_biliara.jpg']
+['Vezica biliara (colecistul sau "fierea" populara) este un sac de mici dimensiuni, pozitionat imediat sub ficat. Are rolul de a depozita bila secretata de ficat. Bila ajuta la digestia grasimilor si este eliminata din vezica biliara in intestinul subtire, prin intermediul unor canale, cai biliare.Tratamentul litiazei biliare este tratamentul chirurgical.']
+[contraindicatii:
+-[evitati_grasimi]
+-[evitati_alcool]
+]
+---
+[intoxicatie_alimentara]
+['./imagini/intoxicatie_alimentara.jpg']
+['Intoxicatia alimentara este o afectiune cauzata de consumul de alimente sau bauturi contaminate cu microorganisme patogene cum sunt bacteriile, virusurile sau parazitii.Riscul crescut de contaminare este cauzat in principal de conditiile improprii de igiena, gatirea, depozitarea şi conservarea incorecta a alimentelor.Daca simptomele nu sunt severe, este suficient ca pacientul sa urmeze un regim alimentar specific: doua-trei cani de ceai de menta zilnic, orez cu morcovi, branza proaspata etc.']
+[contraindicatii:
+-[evitati_alcool]
+-[evitati_lactate]
+]
+---
+[migrena]
+['./imagini/migrena.jpg']
+['Migrena (numita de asemenea durere de cap sau cefalee) pot dura de la 2 ore pana la 4 zile. Migrena afecteaza foarte multa lume, atat femei cat si barbati, dar cel mai mare procent in reprezinta femeile - 75%.Pentru tratarea migrenei se recomanda medicamente profilactice in mod continuu (beta blocante, blocante ale canalelor de calciu sau antidepresive), dar si antiinflamatoarele nesteroidine (aspirina sau ibuprofenul).']
+[contraindicatii:
+-[evitati_soare]
+-[evitati_alcool]
+-[evitati_efort]
+]
+---
+[bronsita]
+['./imagini/bronsita.jpg']
+['Bronsita reprezinta inflamatia cailor aeriene ce duc aerul la plamani (bronhiile terminale). Inflamatia la acest nivel produce edem (cresterea volumului) si se produce mucus (sputa). Edemul si sputa favorizeaza tusea si astfel respiratia devine dificila.Tratamentul bronsitelor include medicamente pentru tratarea tusei, calmarea durerii, febrei si antibiotice.']
+[contraindicatii:
+-[evitati_alcool]
+-[evitati_efort]
+-[evitati_fum]
+]
+---
+[sinuzita]
+['./imagini/sinuzita.jpg']
+['Sinuzitele sunt infectii ale membranei mucoase care captuseste interiorul foselor nazale si sinusurile. Cand membrana mucoasa se inflameaza, se tumefiaza, blocheaza drenajul fluidului din sinus spre nas si gat, determinand durere si presiune in sinusuri. Bacteriile si fungii cresc cel mai probabil in sinusurile incapabile sa se dreneze corespunzator.Tratamentul pentru sinuzita:medicamentos: antibiotic per os sau intravenos ( in cazurile grave) cel putin 10 zile, antiinflamatorii, mucolititice si secretolitice, antihistaminicelocal: - toaleta foselor nazale, mese DNF, administrare de spray vasoconstrictor chirurgical: drenarea secretilor purulente din sinusuri, corectarea obstructiei nazale (deviatia sept nazal, hipertrofia cornetelor nazale inferioare)']
+[contraindicatii:
+-[evitati_efort]
+-[evitati_alcool]
+]
+---
+[conjunctivita]
+['./imagini/conjunctivita.jpg']
+['Conjunctivita este o inflamatie a mucoasei pleoapelor (tesutul subtire situat pe fata posterioara a pleoapelor cu rol in apararea si mentinerea umeda a globului ocular).Tratamentul local consta in indepartarea mecanica a secretiilor prin spalaturi oculare (ser fiziologic, apa fiarta si racita, solutii antiseptice), apoi instilatii cu coliruri cu antibiotice, cu spectru larg sau conform antibiogramei.']
+[contraindicatii:
+-[evitati_soare]
+-[evitati_fum]
+]
+---
+[meningita]
+['./imagini/meningita.jpg']
+['Boala reprezinta o inflamatie a meningelor cu modificarea sau nu a lichidului cefalorahidian pe care acestea il contin intre ele. Numeroase afectiuni, ca bolile canceroase sau conectivitele (lupus eritematos, sarcoidoza etc.), pot fi insotite de o reactie inflamatorie a meningelui.Meningita poate fi tratata cu antibiotice prescrise la recomandarea medicului, dar uneori poate fi necesara şi administrarea de medicamente pe baza de steroizi. Pacientul necesita internare şi supraveghere permanenta pentru observarea evolutiei bolii şi pentru a identifica efectele medicatiei.']
+[contraindicatii:
+-[evitati_efort]
+-[evitati_alcool]
+]
+---
+[gastrita]
+['./imagini/gastrita.jpg']
+['Gastrita consta in afectiunea mucoasei gastrice reprezentata de procese inflamatorii, degenerative, metaplazice, alergice. Aceste leziuni pot avea o evolutie autolimitanta ducand la cicatrizare sau dimpotriva pot duce la complicatii grave reprezentate in special de hemoragii sau perforatii.
+Pentru tratamentul eficient al gastritei se recomanda schimbari in alimentatia zilnica.']
+[contraindicatii:
+-[evitati_alcool]
+-[evitati_acidulate]
+]
+---
+[ulcer]
+['./imagini/ulcer.jpg']
+['Ulcerele peptice sunt leziuni la nivelul mucoasei gastrice (a stomacului) sau a mucoasei intestinului subtire superior (duodenului). Aceste leziuni apar atunci cand secretiile gastrice - care contin acid clorhidric si o enzima numita pepsina - irita si lezeaza mucoasa stomacului. Secretiile gastrice pot afecta si esofagul.Ulcerul poate fi tratat definitiv cu antibiotice, eliminandu-se din organism bacteria Helicobacter Pylori. Boala este tratata ca o infectie, iar la interventia chirurgicala nu se mai apeleaza decat in cazuri extreme.']
+[contraindicatii:
+-[evitati_alcool]
+-[evitati_acidulate]
+]
+---
+[pneumonie]
+['./imagini/pneumonie.jpg']
+['Pneumonia este o inflamatie a plamanilor, cauzata cel mai adesea de o infectie cu bacterii sau virusuri. Boala este cu atat mai periculoasa cu cat sistemul imunitar este mai slabit. In rare cazuri, pneumonia este data de o infectie micotica (cu fungi ori ciuperci) sau parazitara.Pentru tratarea penumoniei se recomanda exercitii de respiratie profunda.']
+[contraindicatii:
+-[evitati_efort]
+-[evitati_fum]
+]
+---
+
+

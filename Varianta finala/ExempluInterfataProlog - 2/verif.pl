@@ -38,7 +38,7 @@ scrie_lista_c([H|T]) :- write(' - '), write(H), nl, scrie_lista_c(T).
 
 scrie_lista_c(Stream,[H|T]) :- write(Stream, H), write(Stream,' , '), scrie_lista_c(Stream, T).
 
-scrie_lista(Stream,[]):-nl(Stream),flush_output(Stream).
+scrie_lista(Stream,[]):-nl(Stream),flush_output(Stream),write('20\n').
 
 scrie_lista(Stream,[H|T]) :-
                             write(Stream,H), tab(Stream,1),
@@ -113,9 +113,9 @@ scopuri_princ :-scop(Atr),
                 setof(sol(Atr,Val,FC),G^fapt(av(Atr,Val),FC,G),L),
                 lista_rev(L,LNou),
                 afiseaza_scop(Atr),
-                datime(T), datime(Y,M,D,H,Min,S) = T,
+                datime(T), datime(Y,M,D,H,Min,S) = T, fapt(av(Atr,Val),_,_),
 				prelucrare_timp_ts(Y,M,D,H,Min,S,F),
-				creare_t(F).
+				creare_t(F,LNou).
 				
 scopuri_princ:- write('Nu s-au gasit solutii.') .
 
@@ -130,10 +130,10 @@ scopuri_princ(Stream) :-scop(Atr),
                         lista_rev(L,LNou), 
                         afiseaza_scop(Stream,Atr),
 						datime(T), datime(Y,M,D,H,Min,S) = T,
-						prelucrare_timp_ts(Y,M,D,H,Min,S,F),
-						creare_t(F).
+						prelucrare_timp_ts(Y,M,D,H,Min,S,F), fapt(av(Atr,Val),_,_), 
+						creare_t(F,LNou),write(Stream,z(F)), nl(Stream), flush_output(Stream).
 						
-scopuri_princ(Stream):- write('Nu sunt solutii\n'), write(Stream, s('Nu s-au gasit solutii.')), nl(Stream), flush_output(Stream). 
+scopuri_princ(Stream):- write('Nu sunt solutii\n'), write(Stream, n('Nu s-au gasit solutii.')), nl(Stream), flush_output(Stream). 
 
 prelucrare_timp_ts(A1,L1,Z1,O1,M1,S1, F):- number_chars(A1,A), adauga_lista_car('_',A, F1),
 										 number_chars(L1,L), adauga_lista_car(F1,L, F2),
@@ -145,8 +145,7 @@ prelucrare_timp_ts(A1,L1,Z1,O1,M1,S1, F):- number_chars(A1,A), adauga_lista_car(
 adauga_lista_car(L,[],L).
 adauga_lista_car(F,[H1|T1], F1):- atom_concat(F,H1,F2), adauga_lista_car(F2, T1, F1).
 
-
-creare_t(Time):- (directory_exists('output_sistem_expert'),!;										%creare director output
+creare_t(Time,LNou):- (directory_exists('output_sistem_expert'),!;										%creare director output
 					make_directory('output_sistem_expert'), close_all_streams),
 					(directory_exists('output_sistem_expert/utilizatori'),!;				%creare director output
 					make_directory('output_sistem_expert/utilizatori'), close_all_streams),
@@ -154,8 +153,13 @@ creare_t(Time):- (directory_exists('output_sistem_expert'),!;										%creare d
 					(directory_exists(D),!;																				%creare director output
 					make_directory(D), close_all_streams),
 					atom_concat(D, '/',D1), atom_concat('t', Time, T1), atom_concat(D1, T1, Dff), atom_concat(Dff, '.txt', Df),
-					open(Df, write, Stream).
-					%(directory_exists(Df),!;make_directory(Df), close_all_streams).
+					open(Df, write, StreamR),close(StreamR),
+					  atom_concat('d', Time, Dt), atom_concat(D1, Dt, Dff2), atom_concat(Dff2, '.txt', Df2),
+					  open(Df2, append, StreamRd), write(LNou),nl, scrie_d(StreamRd, Df2, LNou),!.
+
+
+scrie_d(StreamRd, Df2, [sol(Atr,Val,FC)|T]):- cum(StreamRd,av(Atr,Val)),write('??????\n'),!,  scrie_d(StreamRd, Df2,T).
+scrie_d(StreamRd,Df2,[]):- close(StreamRd).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -172,7 +176,7 @@ determina(_,_).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 afiseaza_scop(Atr) :- nl,fapt(av(Atr,Val),FC,_),
-                      FC >= 20,scrie_scop(av(Atr,Val),FC),											% afiseaza doar scopurile relevante (cu FC>=20)
+                      FC >= 50,scrie_scop(av(Atr,Val),FC),											% afiseaza doar scopurile relevante (cu FC>=50)
                       nl,fail.
 
 afiseaza_scop(_) :- nl, nl.
@@ -188,7 +192,7 @@ scrie_scop(av(Atr,Val),FC) :- solutie(Val, Imagine, Descriere, Contraindicatii),
 %%%%%%%%%%%%%%%%%%%%%%%%%%interfata%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 afiseaza_scop(Stream, A) :-  nl(Stream),fapt(av(A,Val),FC,_),
-                             FC >= 20,scrie_scop(Stream,av(A,Val), FC),fail.  
+                             FC >= 50,scrie_scop(Stream,av(A,Val), FC),fail.  
                          
 afiseaza_scop(Stream,_):- nl(Stream), flush_output(Stream).
 
@@ -266,12 +270,12 @@ cum([]) :- write('Scop? '),nl,
 cum(L) :- transformare(Scop,L),nl, cum(Scop).
 cum(not Scop) :- fapt(Scop,FC,Reguli),																									% Reguli - vezi Istoric
                     lista_float_int(Reguli,Reguli1),
-                    FC < -20,transformare(not Scop,PG),																		% verificam sa fie relevant, un FC sub 20 este irelevant
+                    FC < -50,transformare(not Scop,PG),																		% verificam sa fie relevant, un FC sub 50 este irelevant
                     append(PG,[a,fost,derivat,cu, ajutorul, 'regulilor: '|Reguli1],LL),
                     scrie_lista(LL),nl,afis_reguli(Reguli),fail.													% fail - intoarce la fapt
 cum(Scop) :- fapt(Scop,FC,Reguli),
             lista_float_int(Reguli,Reguli1),
-            FC > 20,transformare(Scop,PG),
+            FC > 50,transformare(Scop,PG),
             append(PG,[a,fost,derivat,cu, ajutorul, 'regulilor: '|Reguli1],LL),
             scrie_lista(LL),nl,afis_reguli(Reguli),
             fail.
@@ -297,6 +301,71 @@ scrie_lista_premise([H|T]) :- transformare(H,H_tr),
                                 tab(5),scrie_lista(H_tr),
                                 scrie_lista_premise(T).																	%in scrie_lista_premise facem transformare2 pt regulile noastre
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%fisier demonstratie%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+cum(StreamRd, not Scop) :- fapt(Scop,FC,Reguli),																									% Reguli - vezi Istoric
+                    lista_float_int(Reguli,Reguli1),
+                    FC < -50,transformareDiagnostic(not Scop,PG),																		% verificam sa fie relevant, un FC sub 50 este irelevant
+                    append(PG,[a,fost,derivat,cu, ajutorul, 'regulilor: '|Reguli1],LL),
+                    scrie_lista(StreamRd,LL),
+                    nl(StreamRd), afis_reguli(StreamRd,Reguli),fail.													% fail - intoarce la fapt
+cum(StreamRd,Scop) :- fapt(Scop,FC,Reguli), write(fapt(Scop,FC,Reguli)),nl,write('3\n'),
+                      lista_float_int(Reguli,Reguli1), write('9\n'),
+                      FC > 50,transformareDiagnostic(Scop,PG), 
+                      append(PG,[a,fost,derivat,cu, ajutorul, 'regulilor: '|Reguli1],LL), write('10\n'),
+                      scrie_lista(StreamRd,LL),write('4\n'),
+                      once(afis_reguli(StreamRd,Reguli)),write('5\n'), fail.
+cum(StreamRd,_).
+
+afis_reguli(StreamRd,[]):-write(StreamRd,'\n').
+afis_reguli(StreamRd,[N|X]) :- once(afis_regula(StreamRd, N)),write('7\n'),
+                        premisele(StreamRd,N), write('8\n'),
+                        afis_reguli(StreamRd,X).
+afis_regula(StreamRd,N) :- regula(N, premise(Lista_premise),concluzie(Scop,FC)),
+							
+                          NN is integer(N),scrie_lista(StreamRd,['Id_regula@',NN]),
+                    scrie_lista(StreamRd,['premise:']), 
+                    scrie_lista_premise(StreamRd,Lista_premise), 				%cerinta f
+                    transformare(Scop,Scop_tr),!, 
+                    append(Scop_tr,['//FC'],L1),
+                    FC1 is integer(FC), scrie_lista(StreamRd, L1), write(StreamRd,FC1), write('&&**').
+
+scrie_lista_premise(StreamRd,[]):-write('#######\n').																%lista_premise - perechi tip av
+scrie_lista_premise(StreamRd,[H|T]) :- transformare(H,H_tr), 
+                                write(StreamRd, '[#]'), scrie_lista(StreamRd,H_tr), write('16\n'),
+                                scrie_lista_premise(StreamRd, T).																	%in scrie_lista_premise facem transformare2 pt regulile noastre
+
+premisele(StreamRd,N) :- regula(N, premise(Lista_premise), _),
+                !, cum_premise(StreamRd,Lista_premise).
+
+cum_premise(StreamRd,[]).
+cum_premise(StreamRd,[Scop|X]) :- cum(StreamRd,Scop),cum_premise(StreamRd,X).
+
+transformare(av(A,da),[A]):-!.
+transformare(not av(A,da), [not,'[',Atr,']']) :- !.
+%transformare(av(A,nu),[not,A]) :- !.										% Nu ajunge pe ramura asta din cauza cut-ului de deasupra
+transformare(av(A,V),[A,<,-,V]).
+
+transformareDiagnostic(av(A,V),[A,=,V]).
+
+
+premisele(N) :- regula(N, premise(Lista_premise), _),
+                !, cum_premise(Lista_premise).
+
+cum_premise([]).
+cum_premise([Scop|X]) :- cum(Scop),
+                        cum_premise(X).
+
+interogheaza(Atr,Mesaj,[da,nu],Istorie) :- !,write(Mesaj),nl,
+                                            citeste_opt(X, [da, nu, nu_stiu, nu_conteaza], Istorie),
+%					    					de_la_utiliz(X,Istorie,[da,nu,nu_stiu,nu_conteaza]),
+                                            det_val_fc(X,Val,FC),
+                                            asserta( fapt(av(Atr,Val),FC,[utiliz]) ).
+
+interogheaza(Atr,Mesaj,Optiuni,Istorie) :- write(Mesaj),nl,
+                                            citeste_opt(VLista,Optiuni,Istorie),
+                                            assert_fapt(Atr,VLista).
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%interfata%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 scrie_lista_premise(_,[]).
 
@@ -320,7 +389,7 @@ cum_premise([Scop|X]) :- cum(Scop),
 
 interogheaza(Atr,Mesaj,[da,nu],Istorie) :- !,write(Mesaj),nl,
                                             citeste_opt(X, [da, nu, nu_stiu, nu_conteaza], Istorie),
-%					    de_la_utiliz(X,Istorie,[da,nu,nu_stiu,nu_conteaza]),
+%					    					de_la_utiliz(X,Istorie,[da,nu,nu_stiu,nu_conteaza]),
                                             det_val_fc(X,Val,FC),
                                             asserta( fapt(av(Atr,Val),FC,[utiliz]) ).
 
@@ -341,9 +410,8 @@ interogheaza(Stream,Atr,Mesaj,[da,nu],Istorie) :-
 interogheaza(Stream,Atr,Mesaj,Optiuni,Istorie) :-
 	write('\n Intrebare atr val multiple\n'),
 	write(Stream,i(Mesaj)),nl(Stream),flush_output(Stream),
-	concat(VLista,[nu_stiu, nu_conteaza],FLista)
-	append(Stream,FLista,Optiuni,Istorie),
-	assert_fapt(Atr,FLista).
+	citeste_opt(Stream,VLista,Optiuni,Istorie),
+	assert_fapt(Atr,VLista).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -399,14 +467,14 @@ dem(_,[],Val_finala,Val_finala,_).
 
 dem(Stream,[H|T],Val_actuala,Val_finala,Istorie) :-realizare_scop(Stream,H,FC,Istorie),
                                                 Val_interm is min(Val_actuala,FC),
-                                                Val_interm >= 20,
+                                                Val_interm >= 50,
                                                 dem(Stream,T,Val_interm,Val_finala,Istorie).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 dem([],Val_finala,Val_finala,_).
 dem([H|T],Val_actuala,Val_finala,Istorie) :- realizare_scop(H,FC,Istorie),
                                             Val_interm is min(Val_actuala,FC),
-                                            Val_interm >= 20,
+                                            Val_interm >= 50,
                                             dem(T,Val_interm,Val_finala,Istorie).
 						
 actualizeaza(Scop,FC_nou,FC,RegulaN) :- fapt(Scop,FC_vechi,_),
@@ -813,7 +881,7 @@ proceseaza_termen_citit(Stream, X, _):- % cand vrem sa-i spunem "Iesire"
 				write(gata),nl,
 				close(Stream).
 
-proceseaza_termen_citit(Stream, comanda(reset),C):-
+proceseaza_termen_citit(Stream, comanda(reset),C):- write('1234'),
 				write(Stream,'Resetare sistem.\n'),
 				flush_output(Stream),
 				executa([reinitiaza]),

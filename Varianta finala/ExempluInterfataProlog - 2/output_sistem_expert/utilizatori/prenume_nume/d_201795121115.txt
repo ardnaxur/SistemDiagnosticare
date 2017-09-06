@@ -1,0 +1,24 @@
+diagnostic = prostatita a fost derivat cu ajutorul regulilor:  107 7 6 
+Id_regula@ 107 
+premise: 
+[#]zona_dureroasa < - bazin 
+[#]sex < - masculin 
+[#]durere_urinara 
+diagnostic < - prostatita //FC 
+65zona_dureroasa = bazin a fost derivat cu ajutorul regulilor:  utiliz 
+sex = masculin a fost derivat cu ajutorul regulilor:  utiliz 
+durere_urinara = da a fost derivat cu ajutorul regulilor:  utiliz 
+Id_regula@ 7 
+premise: 
+[#]varsta < - batran 
+[#]zona_dureroasa < - bazin 
+[#]sex < - masculin 
+[#]durere_urinara 
+[#]incontinenta_urinara 
+diagnostic < - prostatita //FC 
+95varsta = batran a fost derivat cu ajutorul regulilor:  100 
+Id_regula@ 100 
+premise: 
+[#]nr_ani < - '50-110' 
+varsta < - batran //FC 
+95nr_ani = '50-110' a fost derivat cu ajutorul regulilor:  utiliz 

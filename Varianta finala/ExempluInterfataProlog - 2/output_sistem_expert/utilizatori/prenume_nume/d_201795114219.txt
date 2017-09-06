@@ -1,0 +1,70 @@
+diagnostic = prostatita a fost derivat cu ajutorul regulilor:  107 7 6 
+Id_regula@ 107 
+premise: 
+[#]zona_dureroasa < - bazin 
+[#]sex < - masculin 
+[#]durere_urinara 
+diagnostic < - prostatita diagnostic este prostatita diagnostic < - prostatita diagnostic este prostatita      durere_urinara 
+diagnostic < - prostatita diagnostic este prostatita diagnostic < - prostatita diagnostic este prostatita [#]sex este masculin 
+[#]durere_urinara 
+diagnostic < - prostatita diagnostic este prostatita diagnostic < - prostatita diagnostic este prostatita      durere_urinara 
+diagnostic < - prostatita diagnostic este prostatita diagnostic < - prostatita diagnostic este prostatita      sex < - masculin 
+[#]durere_urinara 
+diagnostic < - prostatita diagnostic este prostatita diagnostic < - prostatita diagnostic este prostatita      durere_urinara 
+diagnostic < - prostatita diagnostic este prostatita diagnostic < - prostatita diagnostic este prostatita      sex este masculin 
+[#]durere_urinara 
+diagnostic < - prostatita diagnostic este prostatita diagnostic < - prostatita diagnostic este prostatita      durere_urinara 
+diagnostic < - prostatita diagnostic este prostatita diagnostic < - prostatita diagnostic este prostatita [#]zona_dureroasa este bazin 
+[#]sex < - masculin 
+[#]durere_urinara 
+diagnostic < - prostatita diagnostic este prostatita diagnostic < - prostatita diagnostic este prostatita      durere_urinara 
+diagnostic < - prostatita diagnostic este prostatita diagnostic < - prostatita diagnostic este prostatita [#]sex este masculin 
+[#]durere_urinara 
+diagnostic < - prostatita diagnostic este prostatita diagnostic < - prostatita diagnostic este prostatita      durere_urinara 
+diagnostic < - prostatita diagnostic este prostatita diagnostic < - prostatita diagnostic este prostatita      sex < - masculin 
+[#]durere_urinara 
+diagnostic < - prostatita diagnostic este prostatita diagnostic < - prostatita diagnostic este prostatita      durere_urinara 
+diagnostic < - prostatita diagnostic este prostatita diagnostic < - prostatita diagnostic este prostatita      sex este masculin 
+[#]durere_urinara 
+diagnostic < - prostatita diagnostic este prostatita diagnostic < - prostatita diagnostic este prostatita      durere_urinara 
+diagnostic < - prostatita diagnostic este prostatita diagnostic < - prostatita diagnostic este prostatita      zona_dureroasa < - bazin 
+[#]sex < - masculin 
+[#]durere_urinara 
+diagnostic < - prostatita diagnostic este prostatita diagnostic < - prostatita diagnostic este prostatita      durere_urinara 
+diagnostic < - prostatita diagnostic este prostatita diagnostic < - prostatita diagnostic este prostatita [#]sex este masculin 
+[#]durere_urinara 
+diagnostic < - prostatita diagnostic este prostatita diagnostic < - prostatita diagnostic este prostatita      durere_urinara 
+diagnostic < - prostatita diagnostic este prostatita diagnostic < - prostatita diagnostic este prostatita      sex < - masculin 
+[#]durere_urinara 
+diagnostic < - prostatita diagnostic este prostatita diagnostic < - prostatita diagnostic este prostatita      durere_urinara 
+diagnostic < - prostatita diagnostic este prostatita diagnostic < - prostatita diagnostic este prostatita      sex este masculin 
+[#]durere_urinara 
+diagnostic < - prostatita diagnostic este prostatita diagnostic < - prostatita diagnostic este prostatita      durere_urinara 
+diagnostic < - prostatita diagnostic este prostatita diagnostic < - prostatita diagnostic este prostatita      zona_dureroasa este bazin 
+[#]sex < - masculin 
+[#]durere_urinara 
+diagnostic < - prostatita diagnostic este prostatita diagnostic < - prostatita diagnostic este prostatita      durere_urinara 
+diagnostic < - prostatita diagnostic este prostatita diagnostic < - prostatita diagnostic este prostatita [#]sex este masculin 
+[#]durere_urinara 
+diagnostic < - prostatita diagnostic este prostatita diagnostic < - prostatita diagnostic este prostatita      durere_urinara 
+diagnostic < - prostatita diagnostic este prostatita diagnostic < - prostatita diagnostic este prostatita      sex < - masculin 
+[#]durere_urinara 
+diagnostic < - prostatita diagnostic este prostatita diagnostic < - prostatita diagnostic este prostatita      durere_urinara 
+diagnostic < - prostatita diagnostic este prostatita diagnostic < - prostatita diagnostic este prostatita      sex este masculin 
+[#]durere_urinara 
+diagnostic < - prostatita diagnostic este prostatita diagnostic < - prostatita diagnostic este prostatita      durere_urinara 
+diagnostic < - prostatita diagnostic este prostatita diagnostic < - prostatita diagnostic este prostatita tuse = deloc a fost derivat cu ajutorul regulilor:  utiliz 
+temperatura = '36-38' a fost derivat cu ajutorul regulilor:  utiliz 
+durere_abdominala = deloc a fost derivat cu ajutorul regulilor:  utiliz 
+incontinenta_urinara = da a fost derivat cu ajutorul regulilor:  utiliz 
+durere_urinara = da a fost derivat cu ajutorul regulilor:  utiliz 
+sex = masculin a fost derivat cu ajutorul regulilor:  utiliz 
+zona_dureroasa = bazin a fost derivat cu ajutorul regulilor:  utiliz 
+varsta = batran a fost derivat cu ajutorul regulilor:  100 
+Id_regula@ 100 
+premise: 
+[#]nr_ani < - '50-110' 
+varsta < - batran varsta este batran varsta < - batran varsta este batran [#]nr_ani este '50-110' 
+varsta < - batran varsta este batran varsta < - batran varsta este batran      nr_ani < - '50-110' 
+varsta < - batran varsta este batran varsta < - batran varsta este batran      nr_ani este '50-110' 
+varsta < - batran varsta este batran varsta < - batran varsta este batran 

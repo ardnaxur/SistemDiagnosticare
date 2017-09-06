@@ -130,10 +130,10 @@ scopuri_princ(Stream) :-scop(Atr),
                         lista_rev(L,LNou), 
                         afiseaza_scop(Stream,Atr),
 						datime(T), datime(Y,M,D,H,Min,S) = T,
-						prelucrare_timp_ts(Y,M,D,H,Min,S,F),
+						prelucrare_timp_ts(Y,M,D,H,Min,S,F), write(Stream,z(F)), nl(Stream),
 						creare_t(F).
 						
-scopuri_princ(Stream):- write('Nu sunt solutii\n'), write(Stream, s('Nu s-au gasit solutii.')), nl(Stream), flush_output(Stream). 
+scopuri_princ(Stream):- write('Nu sunt solutii\n'), write(Stream, n('Nu s-au gasit solutii.')), nl(Stream), flush_output(Stream). 
 
 prelucrare_timp_ts(A1,L1,Z1,O1,M1,S1, F):- number_chars(A1,A), adauga_lista_car('_',A, F1),
 										 number_chars(L1,L), adauga_lista_car(F1,L, F2),
@@ -154,7 +154,7 @@ creare_t(Time):- (directory_exists('output_sistem_expert'),!;										%creare d
 					(directory_exists(D),!;																				%creare director output
 					make_directory(D), close_all_streams),
 					atom_concat(D, '/',D1), atom_concat('t', Time, T1), atom_concat(D1, T1, Dff), atom_concat(Dff, '.txt', Df),
-					open(Df, write, Stream).
+					open(Df, write, StreamR).
 					%(directory_exists(Df),!;make_directory(Df), close_all_streams).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -320,7 +320,7 @@ cum_premise([Scop|X]) :- cum(Scop),
 
 interogheaza(Atr,Mesaj,[da,nu],Istorie) :- !,write(Mesaj),nl,
                                             citeste_opt(X, [da, nu, nu_stiu, nu_conteaza], Istorie),
-%					    de_la_utiliz(X,Istorie,[da,nu,nu_stiu,nu_conteaza]),
+%					    					de_la_utiliz(X,Istorie,[da,nu,nu_stiu,nu_conteaza]),
                                             det_val_fc(X,Val,FC),
                                             asserta( fapt(av(Atr,Val),FC,[utiliz]) ).
 
@@ -341,9 +341,8 @@ interogheaza(Stream,Atr,Mesaj,[da,nu],Istorie) :-
 interogheaza(Stream,Atr,Mesaj,Optiuni,Istorie) :-
 	write('\n Intrebare atr val multiple\n'),
 	write(Stream,i(Mesaj)),nl(Stream),flush_output(Stream),
-	concat(VLista,[nu_stiu, nu_conteaza],FLista)
-	append(Stream,FLista,Optiuni,Istorie),
-	assert_fapt(Atr,FLista).
+	citeste_opt(Stream,VLista,Optiuni,Istorie),
+	assert_fapt(Atr,VLista).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
